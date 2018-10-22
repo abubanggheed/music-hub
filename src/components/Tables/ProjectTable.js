@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
-import Projects from '../Tables/ProjectTable';
 
-class MyProjects extends Component {
+class ProjectTable extends Component {
   logout = () => {
     this.props.dispatch({ type: 'LOGOUT' });
   }
@@ -11,10 +9,16 @@ class MyProjects extends Component {
   render() {
     return (
       <div>
-        <h1 id="welcome">
-          { this.props.user.username }'s Projects
-        </h1>
-        <LogOutButton className="log-in" />
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Stored Versions</th>
+                    <th>Play Head</th>
+                    <th>Go</th>
+                </tr>
+            </thead>
+        </table>
       </div>
     );
   }
@@ -28,4 +32,4 @@ const mapStateToProps = state => ({
 });
 
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(MyProjects);
+export default connect(mapStateToProps)(ProjectTable);
