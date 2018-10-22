@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/:id', rejectUnauthenticated, (req, res) => {
     switch (req.user.id) {
-        case req.params.id:
+        case Number(req.params.id):
             pool.query(`SELECT project.id, project.head, project."name", COUNT(song.project_id) AS "number" FROM project
             LEFT OUTER JOIN song ON song.project_id = project.id
             WHERE person_id = $1

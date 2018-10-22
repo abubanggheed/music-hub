@@ -8,6 +8,10 @@ class MyProjects extends Component {
     this.props.dispatch({ type: 'LOGOUT' });
   }
 
+  componentDidMount() {
+    this.props.dispatch({type: 'MY_PROJECTS', payload: this.props.user.id});
+  }
+
   render() {
     return (
       <div>
@@ -15,6 +19,7 @@ class MyProjects extends Component {
           { this.props.user.username }'s Projects
         </h1>
         <LogOutButton className="log-in" />
+        <Projects />
       </div>
     );
   }

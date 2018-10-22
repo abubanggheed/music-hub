@@ -19,6 +19,7 @@ class ProjectTable extends Component {
                 </tr>
             </thead>
         </table>
+        {JSON.stringify(this.props.table)}
       </div>
     );
   }
@@ -28,7 +29,7 @@ class ProjectTable extends Component {
 // if you wanted you could write this code like this:
 // const mapStateToProps = ({user}) => ({ user });
 const mapStateToProps = state => ({
-  user: state.user,
+  table: state.table,
 });
 
 // this allows us to use <App /> in index.js
