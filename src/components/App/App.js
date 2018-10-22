@@ -19,6 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import MyProjects from '../MyProjects/MyProjects';
 import MySongs from '../MySongs/MySongs';
 import Explore from '../Explore/Explore';
+import ProjectForm from '../ProjectForm/ProjectForm';
 
 import './App.css';
 
@@ -48,6 +49,11 @@ class App extends Component {
               exact
               path="/home"
               component={UserPage}
+            />
+            <ProtectedRoute
+              exact
+              path="/newProject"
+              component={ProjectForm}
             />
             <ProtectedRoute
               exact

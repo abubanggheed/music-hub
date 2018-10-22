@@ -29,9 +29,18 @@ function* projects(action) {
   }
 }
 
+function* addProject(action) {
+  try {
+    yield axios.post('api/project', {name: action.payload});
+  } catch (error) {
+    console.log('Error with project posts:', error);
+  }
+}
+
 function* projectSaga() {
   yield takeLatest('MY_PROJECTS', userProjects);
   yield takeLatest('PROJECTS', projects);
+  yield takeLatest('NEW_PROJECT', addProject);
 }
 
 export default projectSaga;

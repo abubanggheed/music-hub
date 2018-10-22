@@ -21,7 +21,7 @@ class ProjectTable extends Component {
                 <td>{project.name}</td>
                 <td>{project.number}</td>
                 <td><button>Play</button></td>
-                <td><button>projects</button></td>
+                <td><button>project page</button></td>
               </tr>
             ))}
           </tbody>

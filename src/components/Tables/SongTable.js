@@ -24,7 +24,7 @@ class SongTable extends Component {
                 <td>{project.type}</td>
                 <td><button>Play</button></td>
                 <td><button>Manage</button></td>
-                <td><button>Project</button></td>
+                <td><button>project page</button></td>
               </tr>
             ))}
           </tbody>
