@@ -25,9 +25,11 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 
 
 router.get('/', (req, res) => {
-    pool.query(`SELECT project.id, project.head, project."name", COUNT(song.project_id) AS "number" FROM project
+    pool.query(`SELECT project.id, project."name", person.username AS artist, COUNT(song.project_id) AS versions FROM project
     LEFT OUTER JOIN song ON song.project_id = project.id
-    GROUP BY project.id ORDER BY id;`, [req.params.id])
+    LEFT OUTER JOIN person ON project.person_id = person.id
+    GROUP BY project.id, person.username
+    ORDER BY id;`)
         .then(result => {
             res.send(result.rows);
         }).catch(error => {

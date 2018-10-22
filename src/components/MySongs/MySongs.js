@@ -18,8 +18,8 @@ class MySongs extends Component {
         <h1 id="welcome">
           { this.props.user.username }'s Songs
         </h1>
-        <Songs />
         <LogOutButton className="log-in" />
+        <Songs />
       </div>
     );
   }

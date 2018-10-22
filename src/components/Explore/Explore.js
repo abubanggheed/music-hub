@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
+import Projects from '../Tables/ExploreTable'
 
 class Explore extends Component {
-  logout = () => {
-    this.props.dispatch({ type: 'LOGOUT' });
+  
+  componentDidMount(){
+    this.props.dispatch({type: 'PROJECTS'});
   }
 
   render() {
@@ -13,7 +14,7 @@ class Explore extends Component {
         <h1 id="welcome">
           Explore
         </h1>
-        <LogOutButton className="log-in" />
+        <Projects />
       </div>
     );
   }
@@ -23,7 +24,7 @@ class Explore extends Component {
 // if you wanted you could write this code like this:
 // const mapStateToProps = ({user}) => ({ user });
 const mapStateToProps = state => ({
-  user: state.user,
+  table: state.table,
 });
 
 // this allows us to use <App /> in index.js

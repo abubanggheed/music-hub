@@ -10,7 +10,7 @@ function* userProjects(action) {
     const response = yield axios.get('api/project/' + action.payload, config);
     yield dispatch({type: 'SET_TABLE', payload: response.data});
   } catch (error) {
-    console.log('Error with user login:', error);
+    console.log('Error with project gets:', error);
     if (error.response.status === 403) {
       yield dispatch({ type: 'FORBIDDEN_TABLE' });
     } else {
@@ -22,10 +22,10 @@ function* userProjects(action) {
 // worker Saga: will be fired on "LOGOUT" actions
 function* projects(action) {
   try {
-    const response = yield axios.post('api/project');
-    yield dispatch({ type: 'SET_TABLE', payload: response.rows });
+    const response = yield axios.get('api/project');
+    yield dispatch({ type: 'SET_TABLE', payload: response.data });
   } catch (error) {
-    console.log('Error with user logout:', error);
+    console.log('Error with project gets:', error);
   }
 }
 
