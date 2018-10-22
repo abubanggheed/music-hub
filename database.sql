@@ -18,7 +18,7 @@ CREATE TABLE song (
     "name" VARCHAR(30) NOT NULL,
     "type" VARCHAR(5) DEFAULT "remix",
     "project_id" INT REFERENCES project,
-    last_update TIMESTAMP
+    last_update TIMESTAMP DEFAULT LOCALTIMESTAMP
 );
 
 CREATE TABLE url (
