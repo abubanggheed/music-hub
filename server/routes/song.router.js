@@ -6,8 +6,10 @@ const router = express.Router();
 
 router.get('/mysongs/:id', rejectUnauthenticated, (req, res) => {
     switch (req.user.id) {
-        case req.params.id:
-            pool.query(`SELECT * FROM song WHERE creator = $1;`, [req.params.id])
+        case Number(req.params.id):
+            pool.query(`SELECT song."name", song."type", project."name" AS project FROM song
+            FULL OUTER JOIN project ON song.project_id = project.id
+            WHERE creator = $1 ORDER BY song.id;`, [req.params.id])
                 .then(result => {
                     res.send(result.rows);
                 }).catch(error => {
@@ -24,8 +26,9 @@ router.get('/mysongs/:id', rejectUnauthenticated, (req, res) => {
 });
 
 router.get('/project/:id', (req, res) => {
-    pool.query(`SELECT * FROM song WHERE project_id = $1
-    ORDER BY id;`, [req.params.id])
+    pool.query(`SELECT song."name", song."type", project."name" AS project FROM song
+    FULL OUTER JOIN project ON song.project_id = project.id
+    WHERE creator = $1 ORDER BY song.id;`, [req.params.id])
         .then(result => {
             res.send(result.rows);
         }).catch(error => {
@@ -44,9 +47,9 @@ router.post('/:id', (req, res) => {
         .then(result => {
             pool.query(`INSERT INTO url (song_id, mp3_url, wav_url, production_url, production_type)
             VALUES($1, $2, $3, $4, $5)`, [result.rows[0].id, req.body.mp3, req.body.wav, req.body.production, req.body.ext])
-            .then( result => {
-                res.sendStatus(201);
-            });
+                .then(result => {
+                    res.sendStatus(201);
+                });
         }).catch(error => {
             res.sendStatus(500);
         });
