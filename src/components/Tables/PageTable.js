@@ -13,7 +13,6 @@ class SongTable extends Component {
               <th>Type</th>
               <th>Play</th>
               <th>Download</th>
-              <th>Go</th>
               {this.props.owner && <th>Choose New Head</th>}
             </tr>
           </thead>

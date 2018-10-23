@@ -28,6 +28,11 @@ class ProjectPage extends Component {
     })
   }
 
+  getStats = () => {
+    console.log('user:', this.props.user);
+    console.log('info', this.props.info);
+  }
+
   handleChange = param => event => {
     this.setState({
       ...this.state,
@@ -40,7 +45,10 @@ class ProjectPage extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.dispatch({type: 'NEW_SONG', payload: this.state.newUpload});
+    this.props.dispatch({
+      type: 'NEW_SONG',
+      payload: { ...this.state.newUpload, project_id: this.props.info.id }
+    });
     this.setState({
       uploadDialog: false,
       newUpload: {
@@ -62,17 +70,17 @@ class ProjectPage extends Component {
         <dialog open={this.state.uploadDialog}>
           <h3>New Remix</h3>
           <form onSubmit={this.handleSubmit}>
-            <label onChange={this.handleChange('name')}>Name<input type="text" /></label>
-            <pre><label>mp3<input onChange={this.handleChange('mp3')} type="text" /></label></pre>
-            <pre><label>wav<input onChange={this.handleChange('wav')} type="text" /></label></pre>
-            <pre><label>production file<input onChange={this.handleChange('production')} type="text" /></label></pre>
+            <label>Name<input value={this.state.newUpload.name} onChange={this.handleChange('name')} type="text" /></label>
+            <pre><label>mp3<input value={this.state.newUpload.mp3} onChange={this.handleChange('mp3')} type="text" /></label></pre>
+            <pre><label>wav<input value={this.state.newUpload.wav} onChange={this.handleChange('wav')} type="text" /></label></pre>
+            <pre><label>production file<input value={this.state.newUpload.production} onChange={this.handleChange('production')} type="text" /></label></pre>
             <pre><input type="submit" /></pre>
           </form>
           <button onClick={this.cancleUpload}>Cancle</button>
         </dialog>
-        <Songs />
+        <Songs owner={this.props.user.username === this.props.info.username} />
         <button onClick={this.addRemix}>Add Remix</button>
-        {JSON.stringify(this.state.newUpload)}
+        <button onClick={this.getStats}>Stats</button>
       </div>
     );
   }

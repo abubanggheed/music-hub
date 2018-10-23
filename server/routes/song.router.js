@@ -44,14 +44,15 @@ router.post('/:id', (req, res) => {
         user = req.user.id
     }
     pool.query(`INSERT INTO song (creator, "name", project_id)
-    VALUES ($1, $2) RETURNING id`, [user, req.params.id])
+    VALUES ($1, $2, $3) RETURNING id`, [user, req.body.name , req.params.id])
         .then(result => {
             pool.query(`INSERT INTO url (song_id, mp3_url, wav_url, production_url, production_type)
-            VALUES($1, $2, $3, $4, $5)`, [result.rows[0].id, req.body.mp3, req.body.wav, req.body.production, req.body.ext])
+            VALUES($1, $2, $3, $4, $5)`, [result.rows[0].id, req.body.mp3, req.body.wav, req.body.production])
                 .then(result => {
                     res.sendStatus(201);
                 });
         }).catch(error => {
+            console.log('error in post:', error);
             res.sendStatus(500);
         });
 });
