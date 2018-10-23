@@ -18,7 +18,16 @@ class SongTable extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.table.map(song => (
+            {this.props.table.filter(song => song.type === 'head').map(song => (
+              <tr key={song.id}>
+                <td>{song.name}</td>
+                <td>{song.type}</td>
+                <td><button>Play</button></td>
+                <td><button>Download</button></td>
+                {this.props.owner && <td><button>Choose</button></td>}
+              </tr>
+            ))}
+            {this.props.table.filter(song => song.type !== 'head').map(song => (
               <tr key={song.id}>
                 <td>{song.name}</td>
                 <td>{song.type}</td>
@@ -29,7 +38,6 @@ class SongTable extends Component {
             ))}
           </tbody>
         </table>
-        {JSON.stringify(this.props.table)}
       </div>
     );
   }

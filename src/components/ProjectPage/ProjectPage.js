@@ -8,8 +8,9 @@ class ProjectPage extends Component {
     return (
       <div>
         <h1 id="welcome">
-          {this.props.name}
+          {this.props.info.name}
         </h1>
+        <h2>Creator: {this.props.info.username}</h2>
         <Songs />
       </div>
     );
@@ -20,7 +21,7 @@ class ProjectPage extends Component {
 // if you wanted you could write this code like this:
 // const mapStateToProps = ({user}) => ({ user });
 const mapStateToProps = state => ({
-  table: state.table,
+  info: state.info,
   user: state.user,
 });
 

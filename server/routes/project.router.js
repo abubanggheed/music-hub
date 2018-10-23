@@ -39,8 +39,9 @@ router.get('/', (req, res) => {
 });
 
 router.get('/info/:id', (req, res) => {
-    pool.query(`SELECT * FROM project
-        WHERE id = $1;`, [req.params.id])
+    pool.query(`SELECT "name", project.id, username FROM project
+    JOIN person ON project.person_id = person.id
+    WHERE project.id = $1;`, [req.params.id])
         .then(response => {
             res.send(response.rows);
         }).catch( error => {

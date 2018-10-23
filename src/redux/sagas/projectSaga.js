@@ -40,7 +40,7 @@ function* addProject(action) {
 function* getInfo(action) {
   try {
     const response = yield axios.get('api/project/info/' + action.payload);
-    yield dispatch({ type: 'SET_INFO', payload: response.data});
+    yield dispatch({ type: 'SET_INFO', payload: response.data[0]});
   } catch (error) {
     console.log('Error with project info:', error);
   }
