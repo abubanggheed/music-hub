@@ -52,7 +52,10 @@ router.post('/:id', (req, res) => {
             VALUES($1, $2, $3, $4)`, [result.rows[0].id, req.body.mp3, req.body.wav, req.body.production])
                 .then(result => {
                     res.sendStatus(201);
-                });
+                }).catch( error => {
+                    console.log('error in url post:', error);
+                    res.sendStatus(500);
+                })
         }).catch(error => {
             console.log('error in post:', error);
             res.sendStatus(500);

@@ -42,7 +42,7 @@ class ProjectPage extends Component {
     event.preventDefault();
     this.props.dispatch({
       type: 'NEW_SONG',
-      payload: { ...this.state.newUpload, project_id: this.props.info.id }
+      payload: { ...this.state.newUpload, project_id: this.props.info.project_id }
     });
     this.setState({
       uploadDialog: false,

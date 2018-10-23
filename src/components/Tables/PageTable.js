@@ -3,11 +3,27 @@ import { connect } from 'react-redux';
 
 class SongTable extends Component {
 
+  state = {
+    downloadDialog: false,
+  }
+
   handleChoose = song => {
     this.props.dispatch({ type: 'PROMOTE_SONG', payload: {
       project: this.props.project_id,
       song: song.id,
     }});
+  }
+
+  handleDownload = song => {
+    this.setState({
+      downloadDialog: true,
+    });
+  }
+
+  handleCancel = () => {
+    this.setState({
+      downloadDialog: false,
+    });
   }
 
   render() {
@@ -29,7 +45,7 @@ class SongTable extends Component {
                 <td>{song.name}</td>
                 <td>{song.type}</td>
                 <td><button>Play</button></td>
-                <td><button>Download</button></td>
+                <td><button onClick={() => this.handleDownload(song)}>Download</button></td>
               </tr>
             ))}
             {this.props.table.filter(song => song.type !== 'head').map(song => (
@@ -37,12 +53,16 @@ class SongTable extends Component {
                 <td>{song.name}</td>
                 <td>{song.type}</td>
                 <td><button>Play</button></td>
-                <td><button>Download</button></td>
+                <td><button onClick={() => this.handleDownload(song)}>Download</button></td>
                 {this.props.owner && <td><button onClick={() => this.handleChoose(song)}>Choose</button></td>}
               </tr>
             ))}
           </tbody>
         </table>
+        <dialog open={this.state.downloadDialog}>
+          <h3>Available Downloads</h3>
+          <button onClick={this.handleCancel}>Cancel</button>
+        </dialog>
       </div>
     );
   }
