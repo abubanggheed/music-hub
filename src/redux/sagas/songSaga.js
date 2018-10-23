@@ -38,10 +38,26 @@ function* addSong(action) {
   }
 }
 
+function* promoteSong(action) {
+  try {
+    yield axios({
+      method: 'PUT',
+      url: '/api/song/head',
+      params: {
+        ...action.payload
+      }
+    });
+    yield dispatch({ type: 'PROJECT_SONGS', payload: action.payload.project});
+  } catch (error) {
+    console.log('Error with promoting song:', error);
+  }
+}
+
 function* songSaga() {
   yield takeLatest('MY_SONGS', userSongs);
   yield takeLatest('PROJECT_SONGS', projectSongs);
   yield takeLatest('NEW_SONG', addSong);
+  yield takeLatest('PROMOTE_SONG', promoteSong);
 }
 
 export default songSaga;

@@ -3,6 +3,13 @@ import { connect } from 'react-redux';
 
 class SongTable extends Component {
 
+  handleChoose = song => {
+    this.props.dispatch({ type: 'PROMOTE_SONG', payload: {
+      project: this.props.project_id,
+      song: song.id,
+    }});
+  }
+
   render() {
     return (
       <div>
@@ -23,7 +30,6 @@ class SongTable extends Component {
                 <td>{song.type}</td>
                 <td><button>Play</button></td>
                 <td><button>Download</button></td>
-                {this.props.owner && <td><button>Choose</button></td>}
               </tr>
             ))}
             {this.props.table.filter(song => song.type !== 'head').map(song => (
@@ -32,7 +38,7 @@ class SongTable extends Component {
                 <td>{song.type}</td>
                 <td><button>Play</button></td>
                 <td><button>Download</button></td>
-                {this.props.owner && <td><button>Choose</button></td>}
+                {this.props.owner && <td><button onClick={() => this.handleChoose(song)}>Choose</button></td>}
               </tr>
             ))}
           </tbody>

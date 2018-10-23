@@ -26,7 +26,7 @@ router.get('/mysongs/:id', rejectUnauthenticated, (req, res) => {
 });
 
 router.get('/project/:id', (req, res) => {
-    pool.query(`SELECT song."name", person.username AS artist, song."type", song.id, project."name" AS project FROM song
+    pool.query(`SELECT song."name", person.username AS artist, person.id AS person_id, song."type", song.id, project."name" AS project FROM song
     LEFT OUTER JOIN project ON song.project_id = project.id
     LEFT OUTER JOIN person ON song.creator = person.id
     WHERE project.id = $1 ORDER BY song.id;`, [req.params.id])
@@ -44,10 +44,12 @@ router.post('/:id', (req, res) => {
         user = req.user.id
     }
     pool.query(`INSERT INTO song (creator, "name", project_id)
-    VALUES ($1, $2, $3) RETURNING id`, [user, req.body.name , req.params.id])
+    VALUES ($1, $2, $3) RETURNING id`, [user, req.body.name, req.params.id])
         .then(result => {
-            pool.query(`INSERT INTO url (song_id, mp3_url, wav_url, production_url, production_type)
-            VALUES($1, $2, $3, $4, $5)`, [result.rows[0].id, req.body.mp3, req.body.wav, req.body.production])
+            console.log(result.rows);
+            console.log(req.body);
+            pool.query(`INSERT INTO url (song_id, mp3_url, wav_url, production_url)
+            VALUES($1, $2, $3, $4)`, [result.rows[0].id, req.body.mp3, req.body.wav, req.body.production])
                 .then(result => {
                     res.sendStatus(201);
                 });
@@ -56,5 +58,34 @@ router.post('/:id', (req, res) => {
             res.sendStatus(500);
         });
 });
+
+router.put('/head', (req, res) => {
+    if (req.user) {
+        pool.query(`UPDATE project SET head = $1
+            WHERE id = $2 AND person_id = $3
+            RETURNING head;`, [req.query.song, req.query.project, req.user.id])
+            .then(result => {
+                let newHead = result.rows[0].head;
+                pool.query(`UPDATE song SET "type" = 'remix'
+                WHERE project_id = $1;`, [req.query.project])
+                    .then(result => {
+                        pool.query(`UPDATE song SET "type" = 'head'
+                    WHERE id = $1;`, [newHead])
+                            .then(result => {
+                                res.sendStatus(200);
+                            }).catch(error => {
+                                console.log('error in set head:', error);
+                            });
+                    }).catch(error => {
+                        console.log('error in set remix:', error);
+                    });
+            }).catch(error => {
+                console.log('error in promote:', error);
+                res.sendStatus(500);
+            });
+    } else {
+        res.sendStatus(403);
+    }
+})
 
 module.exports = router;

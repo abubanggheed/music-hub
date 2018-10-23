@@ -28,11 +28,6 @@ class ProjectPage extends Component {
     })
   }
 
-  getStats = () => {
-    console.log('user:', this.props.user);
-    console.log('info', this.props.info);
-  }
-
   handleChange = param => event => {
     this.setState({
       ...this.state,
@@ -78,9 +73,9 @@ class ProjectPage extends Component {
           </form>
           <button onClick={this.cancleUpload}>Cancle</button>
         </dialog>
-        <Songs owner={this.props.user.username === this.props.info.username} />
+        <Songs project_id = {this.props.info.project_id}
+        owner={this.props.user.username === this.props.info.username} />
         <button onClick={this.addRemix}>Add Remix</button>
-        <button onClick={this.getStats}>Stats</button>
       </div>
     );
   }
