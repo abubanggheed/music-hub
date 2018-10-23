@@ -7,7 +7,7 @@ function* userProjects(action) {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     };
-    const response = yield axios.get('api/project/' + action.payload, config);
+    const response = yield axios.get('api/project/user/' + action.payload, config);
     yield dispatch({type: 'SET_TABLE', payload: response.data});
   } catch (error) {
     console.log('Error with project gets:', error);
@@ -37,10 +37,20 @@ function* addProject(action) {
   }
 }
 
+function* getInfo(action) {
+  try {
+    const response = yield axios.get('api/project/info/' + action.payload);
+    yield dispatch({ type: 'SET_INFO', payload: response.data});
+  } catch (error) {
+    console.log('Error with project info:', error);
+  }
+}
+
 function* projectSaga() {
   yield takeLatest('MY_PROJECTS', userProjects);
   yield takeLatest('PROJECTS', projects);
   yield takeLatest('NEW_PROJECT', addProject);
+  yield takeLatest('PROJECT_INFO', getInfo);
 }
 
 export default projectSaga;

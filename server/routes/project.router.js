@@ -4,7 +4,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const router = express.Router();
 
 
-router.get('/:id', rejectUnauthenticated, (req, res) => {
+router.get('/user/:id', rejectUnauthenticated, (req, res) => {
     switch (req.user.id) {
         case Number(req.params.id):
             pool.query(`SELECT project.id, project.head, project."name", COUNT(song.project_id) AS "number" FROM project
@@ -35,6 +35,16 @@ router.get('/', (req, res) => {
         }).catch(error => {
             res.sendStatus(500);
             console.log('server error:', error);
+        });
+});
+
+router.get('/info/:id', (req, res) => {
+    pool.query(`SELECT * FROM project
+        WHERE id = $1;`, [req.params.id])
+        .then(response => {
+            res.send(response.rows);
+        }).catch( error => {
+            res.sendStatus(500);
         });
 });
 

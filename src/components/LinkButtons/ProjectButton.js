@@ -7,6 +7,7 @@ class ProjectButton extends Component {
 
     handleClick = () => {
         this.props.dispatch({type: 'PROJECT_SONGS', payload: this.props.page});
+        this.props.dispatch({type: 'PROJECT_INFO', payload: this.props.page});
         this.props.history.push('/explore/' + this.props.page);
     }
 
