@@ -8,7 +8,7 @@ router.get('/available/:id', (req, res) => {
     .then( result => {
         let urls = result.rows[0]
         let objectToSend = {
-            id: id,
+            id: urls.id,
             mp3Status: urls.mp3_url !== '',
             wavStatus: urls.wav_url !== '',
             productionStatus: urls.production_url !== '',

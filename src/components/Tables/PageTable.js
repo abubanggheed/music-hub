@@ -15,6 +15,7 @@ class SongTable extends Component {
   }
 
   handleDownload = song => {
+    this.props.dispatch({type: 'GET_URLS', payload: song.id});
     this.setState({
       downloadDialog: true,
     });
@@ -24,6 +25,10 @@ class SongTable extends Component {
     this.setState({
       downloadDialog: false,
     });
+  }
+
+  handleFile = file => {
+    this.props.dispatch({type: 'DOWNLOAD_URL', payload: {type: file.type, id: file.id }});
   }
 
   render() {
@@ -61,6 +66,9 @@ class SongTable extends Component {
         </table>
         <dialog open={this.state.downloadDialog}>
           <h3>Available Downloads</h3>
+          {this.props.urls.mp3Status && <pre><button onClick={() => this.handleFile({type: 'mp3', id: this.props.urls.id})}>Get mp3</button></pre>}
+          {this.props.urls.wavStatus && <pre><button onClick={() => this.handleFile({type: 'wav', id: this.props.urls.id})}>Get wav</button></pre>}
+          {this.props.urls.productionStatus && <pre><button onClick={() => this.handleFile({type: 'production', id: this.props.urls.id})}>Get production file</button></pre>}
           <button onClick={this.handleCancel}>Cancel</button>
         </dialog>
       </div>
@@ -70,6 +78,7 @@ class SongTable extends Component {
 
 const mapStateToProps = state => ({
   table: state.table,
+  urls: state.url,
 });
 
 export default connect(mapStateToProps)(SongTable);
