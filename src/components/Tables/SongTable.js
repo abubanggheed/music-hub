@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ProjectButton from '../LinkButtons/ProjectButton';
 
 class SongTable extends Component {
 
@@ -23,12 +24,11 @@ class SongTable extends Component {
                 <td>{song.type}</td>
                 <td><button>Play</button></td>
                 <td><button>Manage</button></td>
-                <td><button>project page</button></td>
+                <td><ProjectButton page={song.project_id} /></td>
               </tr>
             ))}
           </tbody>
         </table>
-        {JSON.stringify(this.props.table)}
       </div>
     );
   }

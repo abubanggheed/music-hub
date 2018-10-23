@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/mysongs/:id', rejectUnauthenticated, (req, res) => {
     switch (req.user.id) {
         case Number(req.params.id):
-            pool.query(`SELECT song."name", song."type", project."name" AS project FROM song
+            pool.query(`SELECT song."name", song."type", project.id AS project_id, project."name" AS project FROM song
             FULL OUTER JOIN project ON song.project_id = project.id
             WHERE creator = $1 ORDER BY song.id;`, [req.params.id])
                 .then(result => {

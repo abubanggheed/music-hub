@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ProjectButton from '../LinkButtons/ProjectButton';
 
 class ProjectTable extends Component {
 
@@ -21,7 +22,7 @@ class ProjectTable extends Component {
                 <td>{project.name}</td>
                 <td>{project.number}</td>
                 <td><button>Play</button></td>
-                <td><button>project page</button></td>
+                <td><ProjectButton page={project.id} /></td>
               </tr>
             ))}
           </tbody>
