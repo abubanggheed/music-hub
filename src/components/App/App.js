@@ -20,6 +20,7 @@ import MyProjects from '../MyProjects/MyProjects';
 import MySongs from '../MySongs/MySongs';
 import Explore from '../Explore/Explore';
 import ProjectForm from '../ProjectForm/ProjectForm';
+import ProjectPage from '../ProjectPage/ProjectPage';
 
 import './App.css';
 
@@ -70,10 +71,14 @@ class App extends Component {
               path="/songs"
               component={MySongs}
             />
-            <ProtectedRoute
+            <Route
               exact
               path="/explore"
               component={Explore}
+            />
+            <Route
+              path="/explore/:id"
+              component={ProjectPage}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

@@ -12,8 +12,9 @@ class SongTable extends Component {
               <th>Name</th>
               <th>Type</th>
               <th>Play</th>
-              <th>Manage</th>
+              <th>Download</th>
               <th>Go</th>
+              {this.props.owner && <th>Choose New Head</th>}
             </tr>
           </thead>
           <tbody>
@@ -22,8 +23,8 @@ class SongTable extends Component {
                 <td>{song.name}</td>
                 <td>{song.type}</td>
                 <td><button>Play</button></td>
-                <td><button>Manage</button></td>
-                <td><button>project page</button></td>
+                <td><button>Download</button></td>
+                {this.props.owner && <td><button>Choose</button></td>}
               </tr>
             ))}
           </tbody>

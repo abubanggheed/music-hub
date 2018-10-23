@@ -26,9 +26,10 @@ router.get('/mysongs/:id', rejectUnauthenticated, (req, res) => {
 });
 
 router.get('/project/:id', (req, res) => {
-    pool.query(`SELECT song."name", song."type", project."name" AS project FROM song
-    FULL OUTER JOIN project ON song.project_id = project.id
-    WHERE creator = $1 ORDER BY song.id;`, [req.params.id])
+    pool.query(`SELECT song."name", person.username AS artist, song."type", song.id, project."name" AS project FROM song
+    LEFT OUTER JOIN project ON song.project_id = project.id
+    LEFT OUTER JOIN person ON song.creator = person.id
+    WHERE project.id = $1 ORDER BY song.id;`, [req.params.id])
         .then(result => {
             res.send(result.rows);
         }).catch(error => {
