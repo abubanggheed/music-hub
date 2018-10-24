@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import Projects from '../Tables/ProjectTable';
+import NewProject from '../LinkButtons/NewProjectButton';
 
 class MyProjects extends Component {
   logout = () => {
@@ -20,6 +21,7 @@ class MyProjects extends Component {
         </h1>
         <LogOutButton className="log-in" />
         <Projects />
+        <NewProject />
       </div>
     );
   }
