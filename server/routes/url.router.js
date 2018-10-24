@@ -9,9 +9,9 @@ router.get('/available/:id', (req, res) => {
             let urls = result.rows[0]
             let objectToSend = {
                 id: urls.id,
-                mp3Status: urls.mp3_url !== '',
-                wavStatus: urls.wav_url !== '',
-                productionStatus: urls.production_url !== '',
+                mp3Status: urls.mp3_url !== null,
+                wavStatus: urls.wav_url !== null,
+                productionStatus: urls.production_url !== null,
             }
             res.send(objectToSend);
         }).catch(error => {

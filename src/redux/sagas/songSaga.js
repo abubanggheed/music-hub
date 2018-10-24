@@ -12,7 +12,6 @@ function storeSong(song) {
   if(song){
     let path = '/songs/' + (+new Date()) + '-' + song[0].name;
     return db.child(path).put(song[0]).then(snapshot => {
-      console.log(snapshot.task.location_);
       return snapshot.task.location_.path_;
     });
   }
