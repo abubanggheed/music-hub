@@ -3,7 +3,6 @@ const pool = require('../modules/pool');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const router = express.Router();
 
-
 router.get('/mysongs/:id', rejectUnauthenticated, (req, res) => {
     switch (req.user.id) {
         case Number(req.params.id):
@@ -46,8 +45,7 @@ router.post('/:id', (req, res) => {
     pool.query(`INSERT INTO song (creator, "name", project_id)
     VALUES ($1, $2, $3) RETURNING id`, [user, req.body.name, req.params.id])
         .then(result => {
-            console.log(result.rows);
-            console.log(req.body);
+            console.log('body:', req.body);
             pool.query(`INSERT INTO url (song_id, mp3_url, wav_url, production_url)
             VALUES($1, $2, $3, $4)`, [result.rows[0].id, req.body.mp3, req.body.wav, req.body.production])
                 .then(result => {

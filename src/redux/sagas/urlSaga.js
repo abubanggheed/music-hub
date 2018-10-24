@@ -12,6 +12,7 @@ function* urlAvailability(action) {
 
 function* urlGet(action) {
     try {
+        yield dispatch({ type: 'CLEAR_DOWNLOAD' });
         const response = yield axios({
             method: 'GET',
             url: 'api/url/download',

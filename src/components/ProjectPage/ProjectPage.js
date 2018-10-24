@@ -33,10 +33,19 @@ class ProjectPage extends Component {
       ...this.state,
       newUpload: {
         ...this.state.newUpload,
-        [param]: event.target.value,
+        [param]: event.target.files,
       }
     });
   }
+  handleNameChange = event => {
+    this.setState({
+      ...this.state,
+      newUpload: {
+        ...this.state.newUpload,
+        name: event.target.value,
+      }
+    })
+  } 
 
   handleSubmit = event => {
     event.preventDefault();
@@ -65,10 +74,10 @@ class ProjectPage extends Component {
         <dialog open={this.state.uploadDialog}>
           <h3>New Remix</h3>
           <form onSubmit={this.handleSubmit}>
-            <label>Name<input value={this.state.newUpload.name} onChange={this.handleChange('name')} type="text" /></label>
-            <pre><label>mp3<input value={this.state.newUpload.mp3} onChange={this.handleChange('mp3')} type="text" /></label></pre>
-            <pre><label>wav<input value={this.state.newUpload.wav} onChange={this.handleChange('wav')} type="text" /></label></pre>
-            <pre><label>production file<input value={this.state.newUpload.production} onChange={this.handleChange('production')} type="text" /></label></pre>
+            <label>Name<input value={this.state.newUpload.name} onChange={this.handleNameChange} type="text" /></label>
+            <pre><label>mp3<input name="mp3" files={this.state.newUpload.mp3} onChange={this.handleChange('mp3')} type="file" /></label></pre>
+            <pre><label>wav<input name="wav" files={this.state.newUpload.wav} onChange={this.handleChange('wav')} type="file" /></label></pre>
+            <pre><label>production file<input name="production" files={this.state.newUpload.production} onChange={this.handleChange('production')} type="file" /></label></pre>
             <pre><input type="submit" /></pre>
           </form>
           <button onClick={this.cancleUpload}>Cancle</button>

@@ -1,12 +1,24 @@
 import { put as dispatch, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
+import firebase from '../../config';
+
+const config = {
+  headers: { 'Content-Type': 'application/json' },
+  withCredentials: true,
+};
+
+function storeSong(song) {
+  const db = firebase.storage().ref();
+  if(song){
+    let path = '/songs/' + (+new Date()) + '-' + song[0].name;
+    db.child(path).put(song[0]).then(snapshot => {
+      return snapshot.task.location_;
+    });
+  }
+}
 
 function* userSongs(action) {
   try {
-    const config = {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true,
-    };
     const response = yield axios.get('api/song/mysongs/' + action.payload, config);
     yield dispatch({type: 'SET_TABLE', payload: response.data});
   } catch (error) {
@@ -31,7 +43,11 @@ function* projectSongs(action) {
 
 function* addSong(action) {
   try {
-    yield axios.post('api/song/' + action.payload.project_id, action.payload);
+    const refs = {};
+    refs.mp3 = yield storeSong(action.payload.mp3);
+    refs.wav = yield storeSong(action.payload.wav);
+    refs.production = yield storeSong(action.payload.production);
+    yield axios.post('api/song/' + action.payload.project_id, {...refs, name: action.payload.name});
     yield dispatch({ type: 'PROJECT_SONGS', payload: action.payload.project_id });
   } catch (error) {
     console.log('Error with adding song:', error);
