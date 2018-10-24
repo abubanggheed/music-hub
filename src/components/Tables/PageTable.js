@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import DownloadFooter from '../DownloadFooter/DownloadFooter';
 
 class SongTable extends Component {
 
@@ -29,6 +30,7 @@ class SongTable extends Component {
 
   handleFile = file => {
     this.props.dispatch({type: 'DOWNLOAD_URL', payload: {type: file.type, id: file.id }});
+    this.handleCancel();
   }
 
   render() {
@@ -71,6 +73,7 @@ class SongTable extends Component {
           {this.props.urls.productionStatus && <pre><button onClick={() => this.handleFile({type: 'production', id: this.props.urls.id})}>Get production file</button></pre>}
           <button onClick={this.handleCancel}>Cancel</button>
         </dialog>
+        <DownloadFooter />
       </div>
     );
   }

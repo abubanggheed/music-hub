@@ -10,9 +10,23 @@ function* urlAvailability(action) {
     }
 }
 
+function* urlGet(action) {
+    try {
+        const response = yield axios({
+            method: 'GET',
+            url: 'api/url/download',
+            params: {...action.payload}
+        });
+        yield dispatch({ type: 'SET_DOWNLOAD', payload: response.data });
+    } catch (error) {
+        console.log('error in download url:', error);
+    }
+}
+
 
 function* urlSaga() {
     yield takeLatest('GET_URLS', urlAvailability);
+    yield takeLatest('DOWNLOAD_URL', urlGet);
 }
 
 export default urlSaga;
