@@ -11,9 +11,9 @@ function storeSong(song) {
   const db = firebase.storage().ref();
   if(song){
     let path = '/songs/' + (+new Date()) + '-' + song[0].name;
-    db.child(path).put(song[0]).then(snapshot => {
+    return db.child(path).put(song[0]).then(snapshot => {
       console.log(snapshot.task.location_);
-      return snapshot.task.location_;
+      return snapshot.task.location_.path_;
     });
   }
 }
@@ -44,7 +44,7 @@ function* projectSongs(action) {
 
 function* addSong(action) {
   try {
-    const refs = {};
+    let refs = {};
     refs.mp3 = yield storeSong(action.payload.mp3);
     refs.wav = yield storeSong(action.payload.wav);
     refs.production = yield storeSong(action.payload.production);
