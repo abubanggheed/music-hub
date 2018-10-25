@@ -3,9 +3,7 @@ import axios from 'axios';
 import firebase from '../../config';
 
 function getdownloadUrl (path){
-    console.log(path);
     const download = firebase.storage().ref(path);
-    console.log(download);
     return download.getDownloadURL().then(url => {
         return url;
     });
@@ -42,7 +40,6 @@ function* playGet(action) {
             url: 'api/url/play',
             params: {...action.payload}
         });
-        console.log(response.data);
         const downloadUrl = yield getdownloadUrl(response.data);
         yield dispatch({ type: 'QUEUE_SONG', payload: downloadUrl });
         yield dispatch({ type: 'FINISH_SONG'});

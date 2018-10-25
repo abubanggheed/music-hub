@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import './Footer.css'
 
 // This is one of our simplest components
@@ -6,10 +7,19 @@ import './Footer.css'
 // It doesn't dispatch any redux actions or display any part of redux state
 // or even care what the redux state is, so it doesn't need 'connect()'
 
-const Footer = () => (
-  <footer>
-    &copy; Prime Digital Academy
-  </footer>
-);
+class Footer extends Component{
 
-export default Footer;
+  componentDidMount(){
+    this.props.history.push('/home');
+  }
+
+  render() {
+    return (
+      <footer>
+        &copy; Prime Digital Academy
+  </footer>
+    );
+  }
+}
+
+export default withRouter(Footer);
