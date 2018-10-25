@@ -39,7 +39,19 @@ router.get('/download', (req, res) => {
                     break;
             }
             res.send(toSend);
-        }).catch( error => {
+        }).catch(error => {
+            res.sendStatus(500);
+        });
+});
+router.get('/play', (req, res) => {
+    pool.query(`SELECT * FROM url WHERE song_id = $1`, [req.query.id])
+        .then(result => {
+            if (result.rows.length > 0) {
+                res.send(result.rows[0].mp3_url)
+            } else {
+                res.send('');
+            }
+        }).catch(error => {
             res.sendStatus(500);
         });
 });

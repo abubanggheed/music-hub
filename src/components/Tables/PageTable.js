@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DownloadFooter from '../DownloadFooter/DownloadFooter';
+import PlayButton from '../LinkButtons/PlayButton';
 
 class SongTable extends Component {
 
@@ -57,7 +58,7 @@ class SongTable extends Component {
                 <td>{song.name}</td>
                 <td>{song.type}</td>
                 <td>{song.artist}</td>
-                <td><button onClick={() => this.handlePlay(song)}>Play</button></td>
+                <td><PlayButton song={song} /></td>
                 <td><button onClick={() => this.handleDownload(song)}>Download</button></td>
               </tr>
             ))}
@@ -66,7 +67,7 @@ class SongTable extends Component {
                 <td>{song.name}</td>
                 <td>{song.type}</td>
                 <td>{song.artist}</td>
-                <td><button onClick={() => this.handlePlay(song)}>Play</button></td>
+                <td><PlayButton song={song} /></td>
                 <td><button onClick={() => this.handleDownload(song)}>Download</button></td>
                 {this.props.owner && <td><button onClick={() => this.handleChoose(song)}>Choose</button></td>}
               </tr>
