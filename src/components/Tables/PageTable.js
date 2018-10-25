@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DownloadFooter from '../DownloadFooter/DownloadFooter';
 import PlayButton from '../LinkButtons/PlayButton';
+import  { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
+
 
 class SongTable extends Component {
 
@@ -41,39 +43,39 @@ class SongTable extends Component {
   render() {
     return (
       <div>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Type</th>
-              <th>Artist</th>
-              <th>Play</th>
-              <th>Download</th>
-              {this.props.owner && <th>Choose New Head</th>}
-            </tr>
-          </thead>
-          <tbody>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>Type</TableCell>
+              <TableCell>Artist</TableCell>
+              <TableCell>Play</TableCell>
+              <TableCell>Download</TableCell>
+              {this.props.owner && <TableCell>Choose New Head</TableCell>}
+            </TableRow>
+          </TableHead>
+          <TableBody>
             {this.props.table.filter(song => song.type === 'head').map(song => (
-              <tr key={song.id}>
-                <td>{song.name}</td>
-                <td>{song.type}</td>
-                <td>{song.artist}</td>
-                <td><PlayButton song={song} /></td>
-                <td><button onClick={() => this.handleDownload(song)}>Download</button></td>
-              </tr>
+              <TableRow key={song.id}>
+                <TableCell>{song.name}</TableCell>
+                <TableCell>{song.type}</TableCell>
+                <TableCell>{song.artist}</TableCell>
+                <TableCell><PlayButton song={song} /></TableCell>
+                <TableCell><button onClick={() => this.handleDownload(song)}>Download</button></TableCell>
+              </TableRow>
             ))}
             {this.props.table.filter(song => song.type !== 'head').map(song => (
-              <tr key={song.id}>
-                <td>{song.name}</td>
-                <td>{song.type}</td>
-                <td>{song.artist}</td>
-                <td><PlayButton song={song} /></td>
-                <td><button onClick={() => this.handleDownload(song)}>Download</button></td>
-                {this.props.owner && <td><button onClick={() => this.handleChoose(song)}>Choose</button></td>}
-              </tr>
+              <TableRow key={song.id}>
+                <TableCell>{song.name}</TableCell>
+                <TableCell>{song.type}</TableCell>
+                <TableCell>{song.artist}</TableCell>
+                <TableCell><PlayButton song={song} /></TableCell>
+                <TableCell><button onClick={() => this.handleDownload(song)}>Download</button></TableCell>
+                {this.props.owner && <TableCell><button onClick={() => this.handleChoose(song)}>Choose</button></TableCell>}
+              </TableRow>
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
         <dialog open={this.state.downloadDialog}>
           <h3>Available Downloads</h3>
           {this.props.urls.mp3Status && <pre><button onClick={() => this.handleFile({type: 'mp3', id: this.props.urls.id})}>Get mp3</button></pre>}

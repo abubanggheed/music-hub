@@ -1,32 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProjectButton from '../LinkButtons/ProjectButton';
+import  { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
 
 class ProjectTable extends Component {
 
   render() {
     return (
       <div>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Stored Versions</th>
-              <th>Play Head</th>
-              <th>Go</th>
-            </tr>
-          </thead>
-          <tbody>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>Stored Versions</TableCell>
+              <TableCell>Play Head</TableCell>
+              <TableCell>Go</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
             {this.props.table.map(project => (
-              <tr key={project.id}>
-                <td>{project.name}</td>
-                <td>{project.number}</td>
-                <td><button>Play</button></td>
-                <td><ProjectButton page={project.id} /></td>
-              </tr>
+              <TableRow key={project.id}>
+                <TableCell>{project.name}</TableCell>
+                <TableCell>{project.number}</TableCell>
+                <TableCell><button>Play</button></TableCell>
+                <TableCell><ProjectButton page={project.id} /></TableCell>
+              </TableRow>
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
     );
   }

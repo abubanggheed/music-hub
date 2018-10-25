@@ -1,34 +1,39 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProjectButton from '../LinkButtons/ProjectButton';
+import  { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
 
 class SongTable extends Component {
+
+  handleClick = song => {
+    console.log(song);
+  }
 
   render() {
     return (
       <div>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Type</th>
-              <th>Play</th>
-              <th>Manage</th>
-              <th>Go</th>
-            </tr>
-          </thead>
-          <tbody>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>Type</TableCell>
+              <TableCell>Play</TableCell>
+              <TableCell>Manage</TableCell>
+              <TableCell>Go</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
             {this.props.table.map(song => (
-              <tr key={song.id}>
-                <td>{song.name}</td>
-                <td>{song.type}</td>
-                <td><button>Play</button></td>
-                <td><button>Manage</button></td>
-                <td><ProjectButton page={song.project_id} /></td>
-              </tr>
+              <TableRow key={song.id}>
+                <TableCell>{song.name}</TableCell>
+                <TableCell>{song.type}</TableCell>
+                <TableCell><button onClick={() => this.handleClick(song)}>Play</button></TableCell>
+                <TableCell><button>Manage</button></TableCell>
+                <TableCell><ProjectButton page={song.project_id} /></TableCell>
+              </TableRow>
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
     );
   }
