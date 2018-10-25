@@ -5,7 +5,7 @@ const ActiveAudio = props => {
     return (
         <div>
             {props.download.current &&
-                <audio controls src={props.download.current}></audio>}
+                <audio controls src={props.download.current} autoPlay></audio>}
         </div>
     );
 }

@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProjectButton from '../LinkButtons/ProjectButton';
+import PlayButton from '../LinkButtons/PlayButton';
 import  { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
 
 class SongTable extends Component {
-
-  handleClick = song => {
-    console.log(song);
-  }
 
   render() {
     return (
@@ -27,7 +24,7 @@ class SongTable extends Component {
               <TableRow key={song.id}>
                 <TableCell>{song.name}</TableCell>
                 <TableCell>{song.type}</TableCell>
-                <TableCell><button onClick={() => this.handleClick(song)}>Play</button></TableCell>
+                <TableCell><PlayButton song={song} /></TableCell>
                 <TableCell><button>Manage</button></TableCell>
                 <TableCell><ProjectButton page={song.project_id} /></TableCell>
               </TableRow>
