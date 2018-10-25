@@ -12,7 +12,7 @@ class ProjectTable extends Component {
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
-              <TableCell>Artist</TableCell>
+              <TableCell>Creator</TableCell>
               <TableCell>Versions</TableCell>
               <TableCell>Go</TableCell>
             </TableRow>

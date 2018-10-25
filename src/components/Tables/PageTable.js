@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DownloadFooter from '../DownloadFooter/DownloadFooter';
 import PlayButton from '../LinkButtons/PlayButton';
-import  { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
-import { IconButton } from '@material-ui/core';
-import { CloudDownload, ArrowUpwardOutlined } from '@material-ui/icons';
+import { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
+import { IconButton, Dialog, DialogContent, Typography } from '@material-ui/core';
+import { CloudDownload, ArrowUpwardOutlined, CancelOutlined, MusicNote, MusicNoteSharp, FileCopy } from '@material-ui/icons';
 
 class SongTable extends Component {
 
@@ -13,14 +13,16 @@ class SongTable extends Component {
   }
 
   handleChoose = song => {
-    this.props.dispatch({ type: 'PROMOTE_SONG', payload: {
-      project: this.props.project_id,
-      song: song.id,
-    }});
+    this.props.dispatch({
+      type: 'PROMOTE_SONG', payload: {
+        project: this.props.project_id,
+        song: song.id,
+      }
+    });
   }
 
   handleDownload = song => {
-    this.props.dispatch({type: 'GET_URLS', payload: song.id});
+    this.props.dispatch({ type: 'GET_URLS', payload: song.id });
     this.setState({
       downloadDialog: true,
     });
@@ -33,12 +35,8 @@ class SongTable extends Component {
   }
 
   handleFile = file => {
-    this.props.dispatch({type: 'DOWNLOAD_URL', payload: {type: file.type, id: file.id }});
+    this.props.dispatch({ type: 'DOWNLOAD_URL', payload: { type: file.type, id: file.id } });
     this.handleCancel();
-  }
-
-  handlePlay = song => {
-    console.log(song);
   }
 
   render() {
@@ -77,13 +75,15 @@ class SongTable extends Component {
             ))}
           </TableBody>
         </Table>
-        <dialog open={this.state.downloadDialog}>
-          <h3>Available Downloads</h3>
-          {this.props.urls.mp3Status && <pre><button onClick={() => this.handleFile({type: 'mp3', id: this.props.urls.id})}>Get mp3</button></pre>}
-          {this.props.urls.wavStatus && <pre><button onClick={() => this.handleFile({type: 'wav', id: this.props.urls.id})}>Get wav</button></pre>}
-          {this.props.urls.productionStatus && <pre><button onClick={() => this.handleFile({type: 'production', id: this.props.urls.id})}>Get production file</button></pre>}
-          <button onClick={this.handleCancel}>Cancel</button>
-        </dialog>
+        <Dialog open={this.state.downloadDialog}>
+          <Typography variant="h4">Available Downloads</Typography>
+          <DialogContent>
+            {this.props.urls.mp3Status && <pre><IconButton onClick={() => this.handleFile({ type: 'mp3', id: this.props.urls.id })}><MusicNote />Get mp3</IconButton></pre>}
+            {this.props.urls.wavStatus && <pre><IconButton onClick={() => this.handleFile({ type: 'wav', id: this.props.urls.id })}><MusicNoteSharp />Get wav</IconButton></pre>}
+            {this.props.urls.productionStatus && <pre><IconButton onClick={() => this.handleFile({ type: 'production', id: this.props.urls.id })}><FileCopy />Get production file</IconButton></pre>}
+            <IconButton onClick={this.handleCancel}><CancelOutlined />Cancel</IconButton>
+          </DialogContent>
+        </Dialog>
         <DownloadFooter />
       </div>
     );

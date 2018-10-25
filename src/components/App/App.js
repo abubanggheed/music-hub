@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 import { connect } from 'react-redux';
-
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
@@ -25,6 +25,12 @@ import ActiveAudio from '../ActiveAudio/ActiveAudio';
 
 import './App.css';
 
+const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true,
+  }
+});
+
 class App extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_USER' })
@@ -32,62 +38,64 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
-        <div>
-          <Nav />
-          <Switch>
-            <Redirect exact from="/" to="/home" />
-            <Route
-              exact
-              path="/about"
-              component={AboutPage}
-            />
-            <Route
-              exact
-              path="/explore"
-              component={Explore}
-            />
-            <ProtectedRoute
-              exact
-              path="/home"
-              component={UserPage}
-            />
-            <ProtectedRoute
-              exact
-              path="/newProject"
-              component={ProjectForm}
-            />
-            <ProtectedRoute
-              exact
-              path="/info"
-              component={InfoPage}
-            />
-            <ProtectedRoute
-              exact
-              path="/projects"
-              component={MyProjects}
-            />
-            <ProtectedRoute
-              exact
-              path="/songs"
-              component={MySongs}
-            />
-            <Route
-              exact
-              path="/explore"
-              component={Explore}
-            />
-            <Route
-              path="/explore/:id"
-              component={ProjectPage}
-            />
-            {/* If none of the other routes matched, we will show a 404. */}
-            <Route render={() => <h1>404</h1>} />
-          </Switch>
-          <ActiveAudio />
-          <Footer />
-        </div>
-      </Router>
+      <MuiThemeProvider theme={theme}>
+        <Router>
+          <div>
+            <Nav />
+            <Switch>
+              <Redirect exact from="/" to="/home" />
+              <Route
+                exact
+                path="/about"
+                component={AboutPage}
+              />
+              <Route
+                exact
+                path="/explore"
+                component={Explore}
+              />
+              <ProtectedRoute
+                exact
+                path="/home"
+                component={UserPage}
+              />
+              <ProtectedRoute
+                exact
+                path="/newProject"
+                component={ProjectForm}
+              />
+              <ProtectedRoute
+                exact
+                path="/info"
+                component={InfoPage}
+              />
+              <ProtectedRoute
+                exact
+                path="/projects"
+                component={MyProjects}
+              />
+              <ProtectedRoute
+                exact
+                path="/songs"
+                component={MySongs}
+              />
+              <Route
+                exact
+                path="/explore"
+                component={Explore}
+              />
+              <Route
+                path="/explore/:id"
+                component={ProjectPage}
+              />
+              {/* If none of the other routes matched, we will show a 404. */}
+              <Route render={() => <h1>404</h1>} />
+            </Switch>
+            <ActiveAudio />
+            <Footer />
+          </div>
+        </Router>
+      </MuiThemeProvider>
     )
   }
 }

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Songs from '../Tables/PageTable';
-import { IconButton } from '@material-ui/core';
-import { CloudUpload } from '@material-ui/icons';
+import { IconButton, Dialog, Typography, Input, InputLabel } from '@material-ui/core';
+import { CloudUpload, Cancel } from '@material-ui/icons';
 
 class ProjectPage extends Component {
 
@@ -74,17 +74,17 @@ class ProjectPage extends Component {
           {this.props.info.name}
         </h1>
         <h2>Creator: {this.props.info.username}</h2>
-        <dialog open={this.state.uploadDialog}>
-          <h3>New Remix</h3>
+        <Dialog open={this.state.uploadDialog}>
+          <Typography variant="h5">New Remix</Typography>
           <form onSubmit={this.handleSubmit}>
-            <label>Name<input value={this.state.newUpload.name} onChange={this.handleNameChange} type="text" /></label>
-            <pre><label>mp3<input name="mp3" files={this.state.newUpload.mp3} onChange={this.handleChange('mp3')} type="file" /></label></pre>
-            <pre><label>wav<input name="wav" files={this.state.newUpload.wav} onChange={this.handleChange('wav')} type="file" /></label></pre>
-            <pre><label>production file<input name="production" files={this.state.newUpload.production} onChange={this.handleChange('production')} type="file" /></label></pre>
-            <pre><input type="submit" /></pre>
+            <InputLabel required>Name<Input value={this.state.newUpload.name} onChange={this.handleNameChange} type="text" required /></InputLabel>
+            <InputLabel required>mp3<Input name="mp3" files={this.state.newUpload.mp3} onChange={this.handleChange('mp3')} type="file" required /></InputLabel>
+            <InputLabel>wav<Input name="wav" files={this.state.newUpload.wav} onChange={this.handleChange('wav')} type="file" /></InputLabel>
+            <InputLabel>production file<Input name="production" files={this.state.newUpload.production} onChange={this.handleChange('production')} type="file" /></InputLabel>
+            <Input type="submit" value="upload files" />
           </form>
-          <button onClick={this.cancleUpload}>Cancle</button>
-        </dialog>
+          <IconButton onClick={this.cancleUpload}><Cancel />Cancle</IconButton>
+        </Dialog>
         <Songs project_id = {this.props.info.project_id}
         owner={this.props.user.username === this.props.info.username} />
         <IconButton onClick={this.addRemix}><CloudUpload /> Add Remix</IconButton>
