@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { InputLabel, Input } from '@material-ui/core';
 
 class ProjectForm extends Component {
 
@@ -15,7 +16,7 @@ class ProjectForm extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        this.props.dispatch({type: 'NEW_PROJECT', payload: this.state.projectName});
+        this.props.dispatch({ type: 'NEW_PROJECT', payload: this.state.projectName });
         this.setState({
             projectName: '',
         });
@@ -24,12 +25,14 @@ class ProjectForm extends Component {
     render() {
         return (
             <div>
-                <h1 id="welcome">
-                    New Project
-                </h1>
                 <form onSubmit={this.handleSubmit}>
-                    <input onChange={this.handleChange} value={this.state.projectName} type="text" placeholder="Name your Project" required />
-                    <input type="submit" />
+                    <h3>New Project</h3>
+                    <InputLabel>Project Name
+                        <Input onChange={this.handleChange} value={this.state.projectName} type="text" placeholder="Name your Project" required />
+                    </InputLabel>
+                    <pre>
+                        <Input type="submit" value="Add To Your Projects" />
+                    </pre>
                 </form>
             </div>
         );

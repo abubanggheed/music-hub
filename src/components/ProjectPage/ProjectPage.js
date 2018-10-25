@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Songs from '../Tables/PageTable';
+import { IconButton } from '@material-ui/core';
+import { CloudUpload } from '@material-ui/icons';
 
 class ProjectPage extends Component {
 
@@ -85,7 +87,7 @@ class ProjectPage extends Component {
         </dialog>
         <Songs project_id = {this.props.info.project_id}
         owner={this.props.user.username === this.props.info.username} />
-        <button onClick={this.addRemix}>Add Remix</button>
+        <IconButton onClick={this.addRemix}><CloudUpload /> Add Remix</IconButton>
       </div>
     );
   }

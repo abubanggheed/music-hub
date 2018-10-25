@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import DownloadFooter from '../DownloadFooter/DownloadFooter';
 import PlayButton from '../LinkButtons/PlayButton';
 import  { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
-
+import { IconButton } from '@material-ui/core';
+import { CloudDownload, ArrowUpwardOutlined } from '@material-ui/icons';
 
 class SongTable extends Component {
 
@@ -61,7 +62,7 @@ class SongTable extends Component {
                 <TableCell>{song.type}</TableCell>
                 <TableCell>{song.artist}</TableCell>
                 <TableCell><PlayButton song={song} /></TableCell>
-                <TableCell><button onClick={() => this.handleDownload(song)}>Download</button></TableCell>
+                <TableCell><IconButton onClick={() => this.handleDownload(song)}><CloudDownload /></IconButton></TableCell>
               </TableRow>
             ))}
             {this.props.table.filter(song => song.type !== 'head').map(song => (
@@ -70,8 +71,8 @@ class SongTable extends Component {
                 <TableCell>{song.type}</TableCell>
                 <TableCell>{song.artist}</TableCell>
                 <TableCell><PlayButton song={song} /></TableCell>
-                <TableCell><button onClick={() => this.handleDownload(song)}>Download</button></TableCell>
-                {this.props.owner && <TableCell><button onClick={() => this.handleChoose(song)}>Choose</button></TableCell>}
+                <TableCell><IconButton onClick={() => this.handleDownload(song)}><CloudDownload /></IconButton></TableCell>
+                {this.props.owner && <TableCell><IconButton onClick={() => this.handleChoose(song)}><ArrowUpwardOutlined /></IconButton></TableCell>}
               </TableRow>
             ))}
           </TableBody>
