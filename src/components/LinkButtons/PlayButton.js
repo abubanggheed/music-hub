@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { IconButton } from '@material-ui/core';
-import { PlayArrow} from '@material-ui/icons';
+import { PlayCircleOutline } from '@material-ui/icons';
 
 
 class PlayButton extends Component {
@@ -16,7 +16,7 @@ class PlayButton extends Component {
 
     render() {
         return (
-                <IconButton onClick={this.handlePlay}><PlayArrow /></IconButton>
+                <IconButton onClick={this.handlePlay}><PlayCircleOutline /></IconButton>
         );
     }
 }
