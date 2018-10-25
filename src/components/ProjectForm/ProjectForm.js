@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class Explore extends Component {
+class ProjectForm extends Component {
 
     state = {
         projectName: '',
@@ -38,4 +38,4 @@ class Explore extends Component {
 
 
 // this allows us to use <App /> in index.js
-export default connect()(Explore);
+export default connect()(ProjectForm);

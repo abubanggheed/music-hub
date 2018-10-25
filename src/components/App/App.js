@@ -21,6 +21,7 @@ import MySongs from '../MySongs/MySongs';
 import Explore from '../Explore/Explore';
 import ProjectForm from '../ProjectForm/ProjectForm';
 import ProjectPage from '../ProjectPage/ProjectPage';
+import ActiveAudio from '../ActiveAudio/ActiveAudio';
 
 import './App.css';
 
@@ -83,6 +84,7 @@ class App extends Component {
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
+          <ActiveAudio />
           <Footer />
         </div>
       </Router>

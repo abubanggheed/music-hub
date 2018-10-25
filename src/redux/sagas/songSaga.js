@@ -31,7 +31,6 @@ function* userSongs(action) {
   }
 }
 
-// worker Saga: will be fired on "LOGOUT" actions
 function* projectSongs(action) {
   try {
     const response = yield axios.get('api/song/project/' + action.payload);

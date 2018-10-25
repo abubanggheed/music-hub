@@ -33,6 +33,10 @@ class SongTable extends Component {
     this.handleCancel();
   }
 
+  handlePlay = song => {
+    console.log(song);
+  }
+
   render() {
     return (
       <div>
@@ -41,6 +45,7 @@ class SongTable extends Component {
             <tr>
               <th>Name</th>
               <th>Type</th>
+              <th>Artist</th>
               <th>Play</th>
               <th>Download</th>
               {this.props.owner && <th>Choose New Head</th>}
@@ -51,7 +56,8 @@ class SongTable extends Component {
               <tr key={song.id}>
                 <td>{song.name}</td>
                 <td>{song.type}</td>
-                <td><button>Play</button></td>
+                <td>{song.artist}</td>
+                <td><button onClick={() => this.handlePlay(song)}>Play</button></td>
                 <td><button onClick={() => this.handleDownload(song)}>Download</button></td>
               </tr>
             ))}
@@ -59,7 +65,8 @@ class SongTable extends Component {
               <tr key={song.id}>
                 <td>{song.name}</td>
                 <td>{song.type}</td>
-                <td><button>Play</button></td>
+                <td>{song.artist}</td>
+                <td><button onClick={() => this.handlePlay(song)}>Play</button></td>
                 <td><button onClick={() => this.handleDownload(song)}>Download</button></td>
                 {this.props.owner && <td><button onClick={() => this.handleChoose(song)}>Choose</button></td>}
               </tr>
