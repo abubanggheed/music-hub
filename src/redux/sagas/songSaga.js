@@ -82,7 +82,7 @@ function* removeSong(action) {
       method: 'DELETE',
       url: '/api/song/' + action.payload.id
     });
-    const status = yield deleteSongs(response.data.filter(song => song !== null));
+    yield deleteSongs(response.data.filter(song => song !== null));
     if (action.payload.type === 'head') {
       yield dispatch({ type: 'FIX_HEAD', payload: action.payload.project_id });
     }
