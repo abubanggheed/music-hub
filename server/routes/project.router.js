@@ -106,4 +106,13 @@ router.put('/head/:id', (req, res) => {
     });
 });
 
+router.delete('/:id', (req, res) => {
+    pool.query(`DELETE FROM project WHERE id = $1 AND person_id = $2;`, [req.params.id, req.user.id])
+    .then( result => {
+        res.sendStatus(200);
+    }).catch( error => {
+        res.sendStatus(500);
+    });
+});
+
 module.exports = router;

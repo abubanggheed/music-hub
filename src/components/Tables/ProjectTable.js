@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProjectButton from '../LinkButtons/ProjectButton';
-import { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
+import { Table, TableHead, TableBody, TableRow, TableCell, IconButton } from '@material-ui/core';
+import { DeleteSweep } from '@material-ui/icons';
 import PlayButton from '../LinkButtons/PlayButton';
 
 class ProjectTable extends Component {
 
-  handleClick = project => {
-    console.log(project);
+  handleDelete = project => {
+    this.props.dispatch({ type: 'DELETE_PROJECT', payload: project.id });
   }
 
   render() {
@@ -20,6 +21,7 @@ class ProjectTable extends Component {
               <TableCell>Stored Versions</TableCell>
               <TableCell>Play Head</TableCell>
               <TableCell>Go</TableCell>
+              <TableCell>Delete</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -29,6 +31,7 @@ class ProjectTable extends Component {
                 <TableCell>{project.number}</TableCell>
                 <TableCell>{project.head !== null && <PlayButton song={{ id: project.head }} />}</TableCell>
                 <TableCell><ProjectButton page={project.id} /></TableCell>
+                <TableCell><IconButton onClick={() => this.handleDelete(project)}><DeleteSweep /></IconButton></TableCell>
               </TableRow>
             ))}
           </TableBody>
