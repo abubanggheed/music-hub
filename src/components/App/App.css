@@ -4,12 +4,13 @@ body {
 }
 
 .alert {
-    background-color: #ff4545;
+    background-color: #900090;
+    color: #ffffff;
     margin: 50px;
 }
 
 form {
-    background-color: #dbd5d5;
+    background-color: #aaccff;
     width: 30%;
     height: 250px;
     margin: 20px auto;
@@ -23,17 +24,17 @@ input {
 }
 
 .log-in, .log-out, .register {
-  background-color: #00acb0;
+  background-color: #2068aa;
   border-radius: 4px;
   color: #f8f8f8;
-  min-height: 50px;
-  min-width: 100px;
+  min-height: 40px;
+  min-width: 80px;
   outline:0;
   cursor: pointer;
 }
 
 .log-in:hover, .log-out:hover, .register:hover {
-  background-color: #008183;
+  background-color: #8896ff;
 }
 
 .link-button {
@@ -43,6 +44,6 @@ input {
     padding:0;
     font: inherit;
     outline:0;
-    border-bottom:1px solid #444; 
+    border-bottom:1px solid #402040; 
     cursor: pointer;
 }

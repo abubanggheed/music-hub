@@ -17,6 +17,14 @@ function storeSong(song) {
   }
 }
 
+function deleteSongs(urls) {
+  const db = firebase.storage().ref();
+  return urls.forEach(url => {
+    let path = db.child(url);
+    path.delete().then( () => true).catch( () => false );
+  });
+}
+
 function* userSongs(action) {
   try {
     const response = yield axios.get('api/song/mysongs/' + action.payload, config);
@@ -68,11 +76,25 @@ function* promoteSong(action) {
   }
 }
 
+function* removeSong(action) {
+  try {
+    const response = yield axios({
+      method: 'DELETE',
+      url: '/api/song/' + action.payload.id
+    });
+    const status = yield deleteSongs(response.data.filter(song => song !== null));
+    yield dispatch({ type: 'MY_SONGS', payload: action.payload.user_id });
+  } catch (error) {
+    console.log('Error in song delete:', error);
+  }
+}
+
 function* songSaga() {
   yield takeLatest('MY_SONGS', userSongs);
   yield takeLatest('PROJECT_SONGS', projectSongs);
   yield takeLatest('NEW_SONG', addSong);
   yield takeLatest('PROMOTE_SONG', promoteSong);
+  yield takeLatest('DELETE_SONG', removeSong);
 }
 
 export default songSaga;

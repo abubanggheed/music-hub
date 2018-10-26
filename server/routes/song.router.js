@@ -50,7 +50,7 @@ router.post('/:id', (req, res) => {
             VALUES($1, $2, $3, $4)`, [result.rows[0].id, req.body.mp3, req.body.wav, req.body.production])
                 .then(result => {
                     res.sendStatus(201);
-                }).catch( error => {
+                }).catch(error => {
                     console.log('error in url post:', error);
                     res.sendStatus(500);
                 })
@@ -87,6 +87,35 @@ router.put('/head', (req, res) => {
     } else {
         res.sendStatus(403);
     }
-})
+});
+
+router.delete('/:id', (req, res) => {
+    pool.query(`SELECT url.id AS url_id, project.person_id AS "admin", song_id, creator AS artist, url.mp3_url, url.wav_url, url.production_url FROM song
+    JOIN url ON song.id = song_id
+    JOIN project ON song.project_id = project.id
+    WHERE song_id = $1;`, [req.params.id]).then(result => {
+            let data = result.rows[0];
+            console.log(data);
+            if (data.admin == req.user.id || data.artist == req.user.id) {
+                pool.query(`DELETE FROM url WHERE id = $1;`, [data.url_id]).then(result => {
+                    pool.query(`DELETE FROM song WHERE id = $1;`, [data.song_id]).then(result => {
+                        res.send([data.mp3_url, data.wav_url, data.production_url]);
+                    }).catch(error => {
+                        console.log('error in delete song:', error);
+                        res.sendStatus(500);
+                    })
+                }).catch(error => {
+                    console.log('error in delete id:', error);
+                    res.sendStatus(500);
+                })
+
+            } else {
+                res.sendStatue(403);
+            }
+        }).catch( error => {
+            console.log('error in finding data', error);
+            res.sendStatus(400);
+        })
+});
 
 module.exports = router;
