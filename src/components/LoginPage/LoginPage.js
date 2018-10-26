@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Button, Input, InputLabel } from '@material-ui/core';
 
 class LoginPage extends Component {
   state = {
@@ -43,44 +44,44 @@ class LoginPage extends Component {
         <form onSubmit={this.login}>
           <h1>Login</h1>
           <div>
-            <label htmlFor="username">
+            <InputLabel htmlFor="username">
               Username:
-              <input
+              <Input
                 type="text"
                 name="username"
                 value={this.state.username}
                 onChange={this.handleInputChangeFor('username')}
               />
-            </label>
+            </InputLabel>
           </div>
           <div>
-            <label htmlFor="password">
+            <InputLabel htmlFor="password">
               Password:
-              <input
+              <Input
                 type="password"
                 name="password"
                 value={this.state.password}
                 onChange={this.handleInputChangeFor('password')}
               />
-            </label>
+            </InputLabel>
           </div>
           <div>
-            <input
-              className="log-in"
+            <Input
               type="submit"
               name="submit"
               value="Log In"
+              className="log-in"
             />
           </div>
         </form>
         <center>
-          <button
-            type="button"
-            className="link-button"
+          <Button
+            variant="contained"
+            color="primary"
             onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
           >
             Register
-          </button>
+          </Button>
         </center>
       </div>
     );

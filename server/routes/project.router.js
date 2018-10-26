@@ -25,7 +25,7 @@ router.get('/user/:id', rejectUnauthenticated, (req, res) => {
 
 
 router.get('/', (req, res) => {
-    pool.query(`SELECT project.id, project."name", person.username AS artist, COUNT(song.project_id) AS versions FROM project
+    pool.query(`SELECT project.id, project."name", person.username AS artist, COUNT(song.project_id) AS versions, head FROM project
     LEFT OUTER JOIN song ON song.project_id = project.id
     LEFT OUTER JOIN person ON project.person_id = person.id
     GROUP BY project.id, person.username

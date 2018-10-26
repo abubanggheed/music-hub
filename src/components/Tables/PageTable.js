@@ -67,7 +67,7 @@ class SongTable extends Component {
               <TableRow key={song.id}>
                 <TableCell>{song.name}</TableCell>
                 <TableCell>{song.type}</TableCell>
-                <TableCell>{song.artist}</TableCell>
+                <TableCell>{song.artist || 'anonymous'}</TableCell>
                 <TableCell><PlayButton song={song} /></TableCell>
                 <TableCell><IconButton onClick={() => this.handleDownload(song)}><CloudDownload /></IconButton></TableCell>
                 {this.props.owner && <TableCell><IconButton onClick={() => this.handleChoose(song)}><ArrowUpwardOutlined /></IconButton></TableCell>}
