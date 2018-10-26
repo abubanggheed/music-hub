@@ -9,7 +9,7 @@ const config = {
 
 function storeSong(song) {
   const db = firebase.storage().ref();
-  if(song){
+  if (song) {
     let path = '/songs/' + (+new Date()) + '-' + song[0].name;
     return db.child(path).put(song[0]).then(snapshot => {
       return snapshot.task.location_.path_;
@@ -21,14 +21,14 @@ function deleteSongs(urls) {
   const db = firebase.storage().ref();
   return urls.forEach(url => {
     let path = db.child(url);
-    path.delete().then( () => true).catch( () => false );
+    path.delete().then(() => true).catch(() => false);
   });
 }
 
 function* userSongs(action) {
   try {
     const response = yield axios.get('api/song/mysongs/' + action.payload, config);
-    yield dispatch({type: 'SET_TABLE', payload: response.data});
+    yield dispatch({ type: 'SET_TABLE', payload: response.data });
   } catch (error) {
     console.log('Error with getting songs:', error);
     if (error.response.status === 403) {
@@ -54,7 +54,7 @@ function* addSong(action) {
     refs.mp3 = yield storeSong(action.payload.mp3);
     refs.wav = yield storeSong(action.payload.wav);
     refs.production = yield storeSong(action.payload.production);
-    yield axios.post('api/song/' + action.payload.project_id, {...refs, name: action.payload.name});
+    yield axios.post('api/song/' + action.payload.project_id, { ...refs, name: action.payload.name });
     yield dispatch({ type: 'PROJECT_SONGS', payload: action.payload.project_id });
   } catch (error) {
     console.log('Error with adding song:', error);
@@ -70,7 +70,7 @@ function* promoteSong(action) {
         ...action.payload
       }
     });
-    yield dispatch({ type: 'PROJECT_SONGS', payload: action.payload.project});
+    yield dispatch({ type: 'PROJECT_SONGS', payload: action.payload.project });
   } catch (error) {
     console.log('Error with promoting song:', error);
   }
@@ -83,6 +83,9 @@ function* removeSong(action) {
       url: '/api/song/' + action.payload.id
     });
     const status = yield deleteSongs(response.data.filter(song => song !== null));
+    if (action.payload.type === 'head') {
+      yield dispatch({ type: 'FIX_HEAD', payload: action.payload.project_id });
+    }
     yield dispatch({ type: 'MY_SONGS', payload: action.payload.user_id });
   } catch (error) {
     console.log('Error in song delete:', error);

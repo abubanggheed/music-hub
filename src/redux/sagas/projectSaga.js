@@ -46,11 +46,20 @@ function* getInfo(action) {
   }
 }
 
+function* fixHead(action) {
+  try {
+    yield axios.put('/api/project/head/' + action.payload);
+  } catch (error) {
+    console.log('Error fixing head:', error);
+  }
+}
+
 function* projectSaga() {
   yield takeLatest('MY_PROJECTS', userProjects);
   yield takeLatest('PROJECTS', projects);
   yield takeLatest('NEW_PROJECT', addProject);
   yield takeLatest('PROJECT_INFO', getInfo);
+  yield takeLatest('FIX_HEAD', fixHead);
 }
 
 export default projectSaga;
