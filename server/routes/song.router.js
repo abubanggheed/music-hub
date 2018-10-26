@@ -95,7 +95,6 @@ router.delete('/:id', (req, res) => {
     JOIN project ON song.project_id = project.id
     WHERE song_id = $1;`, [req.params.id]).then(result => {
             let data = result.rows[0];
-            console.log(data);
             if (data.admin == req.user.id || data.artist == req.user.id) {
                 pool.query(`DELETE FROM url WHERE id = $1;`, [data.url_id]).then(result => {
                     pool.query(`DELETE FROM song WHERE id = $1;`, [data.song_id]).then(result => {

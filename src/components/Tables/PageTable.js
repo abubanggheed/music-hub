@@ -4,7 +4,7 @@ import DownloadFooter from '../DownloadFooter/DownloadFooter';
 import PlayButton from '../LinkButtons/PlayButton';
 import { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
 import { IconButton, Dialog, DialogContent, Typography } from '@material-ui/core';
-import { CloudDownload, ArrowUpwardOutlined, CancelOutlined, MusicNote, MusicNoteSharp, FileCopy } from '@material-ui/icons';
+import { CloudDownload, ArrowUpwardOutlined, CancelOutlined, MusicNote, MusicNoteSharp, FileCopy, DeleteForever } from '@material-ui/icons';
 
 class SongTable extends Component {
 
@@ -39,6 +39,15 @@ class SongTable extends Component {
     this.handleCancel();
   }
 
+  handleDelete = song => {
+    this.props.dispatch({
+      type: 'DELETE_SONG', payload: {
+        ...song, user_id: this.props.user.id,
+        next: { type: 'PROJECT_SONGS', payload: this.props.project_id},
+      }
+    });
+  }
+
   render() {
     return (
       <div>
@@ -49,6 +58,7 @@ class SongTable extends Component {
               <TableCell>Type</TableCell>
               <TableCell>Artist</TableCell>
               <TableCell>Play</TableCell>
+              {this.props.owner && <TableCell>Delete</TableCell>}
               <TableCell>Download</TableCell>
               {this.props.owner && <TableCell>Choose New Head</TableCell>}
             </TableRow>
@@ -60,6 +70,7 @@ class SongTable extends Component {
                 <TableCell>{song.type}</TableCell>
                 <TableCell>{song.artist}</TableCell>
                 <TableCell><PlayButton song={song} /></TableCell>
+                {this.props.owner && <TableCell><IconButton onClick={() => this.handleDelete(song)}><DeleteForever /></IconButton></TableCell>}
                 <TableCell><IconButton onClick={() => this.handleDownload(song)}><CloudDownload /></IconButton></TableCell>
               </TableRow>
             ))}
@@ -69,6 +80,7 @@ class SongTable extends Component {
                 <TableCell>{song.type}</TableCell>
                 <TableCell>{song.artist || 'anonymous'}</TableCell>
                 <TableCell><PlayButton song={song} /></TableCell>
+                {this.props.owner && <TableCell><IconButton onClick={() => this.handleDelete(song)}><DeleteForever /></IconButton></TableCell>}
                 <TableCell><IconButton onClick={() => this.handleDownload(song)}><CloudDownload /></IconButton></TableCell>
                 {this.props.owner && <TableCell><IconButton onClick={() => this.handleChoose(song)}><ArrowUpwardOutlined /></IconButton></TableCell>}
               </TableRow>
@@ -93,6 +105,7 @@ class SongTable extends Component {
 const mapStateToProps = state => ({
   table: state.table,
   urls: state.url,
+  user: state.user,
 });
 
 export default connect(mapStateToProps)(SongTable);

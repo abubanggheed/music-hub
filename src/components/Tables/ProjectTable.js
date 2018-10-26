@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProjectButton from '../LinkButtons/ProjectButton';
-import  { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
+import { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
 import PlayButton from '../LinkButtons/PlayButton';
 
 class ProjectTable extends Component {
@@ -27,7 +27,7 @@ class ProjectTable extends Component {
               <TableRow key={project.id}>
                 <TableCell>{project.name}</TableCell>
                 <TableCell>{project.number}</TableCell>
-                <TableCell><PlayButton song={{id: project.head}} /></TableCell>
+                <TableCell>{project.head !== null && <PlayButton song={{ id: project.head }} />}</TableCell>
                 <TableCell><ProjectButton page={project.id} /></TableCell>
               </TableRow>
             ))}

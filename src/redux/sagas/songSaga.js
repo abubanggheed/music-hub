@@ -86,7 +86,7 @@ function* removeSong(action) {
     if (action.payload.type === 'head') {
       yield dispatch({ type: 'FIX_HEAD', payload: action.payload.project_id });
     }
-    yield dispatch({ type: 'MY_SONGS', payload: action.payload.user_id });
+    yield dispatch(action.payload.next);
   } catch (error) {
     console.log('Error in song delete:', error);
   }
