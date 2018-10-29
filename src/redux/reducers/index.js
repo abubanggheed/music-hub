@@ -6,6 +6,7 @@ import table from './tableReducer';
 import info from './infoReducer';
 import url from './urlReducer';
 import download from './downloadReducer';
+import messages from './messagesReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   info,
   url,
   download,
+  messages,
 });
 
 export default rootReducer;

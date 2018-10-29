@@ -47,10 +47,11 @@ class ProjectPage extends Component {
         name: event.target.value,
       }
     })
-  } 
+  }
 
   handleSubmit = event => {
     event.preventDefault();
+    this.props.dispatch({ type: 'START_UPLOAD' });
     this.props.dispatch({
       type: 'NEW_SONG',
       payload: { ...this.state.newUpload, project_id: this.props.info.project_id }
@@ -85,8 +86,8 @@ class ProjectPage extends Component {
           </form>
           <IconButton onClick={this.cancleUpload}><Cancel />Cancle</IconButton>
         </Dialog>
-        <Songs project_id = {this.props.info.project_id}
-        owner={this.props.user.username === this.props.info.username} />
+        <Songs project_id={this.props.info.project_id}
+          owner={this.props.user.username === this.props.info.username} />
         <IconButton onClick={this.addRemix}><CloudUpload /> Add Remix</IconButton>
       </div>
     );

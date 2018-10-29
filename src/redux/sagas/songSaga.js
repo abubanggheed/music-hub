@@ -56,8 +56,10 @@ function* addSong(action) {
     refs.production = yield storeSong(action.payload.production);
     yield axios.post('api/song/' + action.payload.project_id, { ...refs, name: action.payload.name });
     yield dispatch({ type: 'PROJECT_SONGS', payload: action.payload.project_id });
+    yield dispatch({ type: 'FINISH_UPLOAD' });
   } catch (error) {
     console.log('Error with adding song:', error);
+    yield dispatch({ type: 'UPLOAD_ERROR' });
   }
 }
 
