@@ -111,6 +111,7 @@ router.delete('/:id', (req, res) => {
     .then( result => {
         res.sendStatus(200);
     }).catch( error => {
+        console.log('failed to delete project:', error);
         res.sendStatus(500);
     });
 });

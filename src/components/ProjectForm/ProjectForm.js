@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { InputLabel, Input } from '@material-ui/core';
 
 class ProjectForm extends Component {
@@ -20,6 +21,7 @@ class ProjectForm extends Component {
         this.setState({
             projectName: '',
         });
+        this.props.history.push('/projects');
     }
 
     render() {
@@ -41,4 +43,4 @@ class ProjectForm extends Component {
 
 
 // this allows us to use <App /> in index.js
-export default connect()(ProjectForm);
+export default connect()(withRouter(ProjectForm));

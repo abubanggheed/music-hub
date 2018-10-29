@@ -5,27 +5,28 @@ CREATE TABLE person (
     password VARCHAR (1000) NOT NULL
 );
 
-CREATE TABLE project (
-    id SERIAL PRIMARY KEY,
-    "user_id" INT REFERENCES person NOT NULL,
-    "name" VARCHAR(30) NOT NULL,
-    head INT
-)
+
+CREATE TABLE "project" (
+	id SERIAL PRIMARY KEY,
+	"person_id" INT REFERENCES person ON DELETE CASCADE NOT NULL,
+	"name" VARCHAR (30) NOT NULL,
+	head INT
+);
+
 
 CREATE TABLE song (
     id SERIAL PRIMARY KEY,
-    creator INT REFERENCES person DEFAULT NULL,
+    creator INT REFERENCES person ON DELETE SET DEFAULT DEFAULT NULL,
     "name" VARCHAR(30) NOT NULL,
     "type" VARCHAR(5) DEFAULT 'remix',
-    "project_id" INT REFERENCES project,
+    "project_id" INT REFERENCES project ON DELETE CASCADE,
     last_update TIMESTAMP DEFAULT LOCALTIMESTAMP
 );
 
-CREATE TABLE "url" (
+CREATE TABLE url (
 	id SERIAL PRIMARY KEY,
-	song_id INT REFERENCES song,
+	song_id INT REFERENCES song ON DELETE CASCADE,
 	mp3_url VARCHAR(500),
 	wav_url VARCHAR(500),
-	production_url VARCHAR(500),
-	production_type VARCHAR(6)
+	production_url VARCHAR(500)
 );

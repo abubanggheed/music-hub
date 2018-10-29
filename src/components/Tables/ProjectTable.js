@@ -8,7 +8,7 @@ import PlayButton from '../LinkButtons/PlayButton';
 class ProjectTable extends Component {
 
   handleDelete = project => {
-    this.props.dispatch({ type: 'DELETE_PROJECT', payload: project.id });
+    this.props.dispatch({ type: 'DELETE_PROJECT', payload: {id: project.id, user: this.props.user.id} });
   }
 
   render() {
@@ -43,6 +43,7 @@ class ProjectTable extends Component {
 
 const mapStateToProps = state => ({
   table: state.table,
+  user: state.user,
 });
 
 export default connect(mapStateToProps)(ProjectTable);

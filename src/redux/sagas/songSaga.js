@@ -19,10 +19,10 @@ function storeSong(song) {
 
 function deleteSongs(urls) {
   const db = firebase.storage().ref();
-  return urls.forEach(url => {
+  return Promise.all(urls.map(url => {
     let path = db.child(url);
-    path.delete().then(() => true).catch(() => false);
-  });
+    return path.delete();
+  }));
 }
 
 function* userSongs(action) {

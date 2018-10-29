@@ -109,6 +109,7 @@ router.delete('/:id', (req, res) => {
                 })
 
             } else {
+                console.log('invalid delete attempt:', error);
                 res.sendStatue(403);
             }
         }).catch( error => {
