@@ -19,7 +19,7 @@ CREATE TABLE song (
     creator INT REFERENCES person ON DELETE SET DEFAULT DEFAULT NULL,
     "name" VARCHAR(30) NOT NULL,
     "type" VARCHAR(5) DEFAULT 'remix',
-    "project_id" INT REFERENCES project ON DELETE CASCADE,
+    "project_id" INT REFERENCES project ON DELETE RESTRICT,
     last_update TIMESTAMP DEFAULT LOCALTIMESTAMP
 );
 
