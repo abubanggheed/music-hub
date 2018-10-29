@@ -16,7 +16,7 @@ class PlayButton extends Component {
 
     render() {
         return (
-                <IconButton onClick={this.handlePlay}><PlayCircleOutline /></IconButton>
+                <IconButton color="primary" onClick={this.handlePlay}><PlayCircleOutline /></IconButton>
         );
     }
 }

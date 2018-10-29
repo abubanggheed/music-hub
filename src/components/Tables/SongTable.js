@@ -62,7 +62,7 @@ render() {
               <TableCell>{song.name}</TableCell>
               <TableCell>{song.type}</TableCell>
               <TableCell><PlayButton song={song} /></TableCell>
-              <TableCell><IconButton onClick={() => this.handleManage(song)}><ViewCarouselSharp /></IconButton></TableCell>
+              <TableCell><IconButton color="secondary" onClick={() => this.handleManage(song)}><ViewCarouselSharp /></IconButton></TableCell>
               <TableCell><ProjectButton page={song.project_id} /></TableCell>
             </TableRow>
           ))}
@@ -70,8 +70,8 @@ render() {
       </Table>
       <Dialog open={this.state.manage.open}>
         <Typography variant="h4">Manage {this.state.manage.song && this.state.manage.song.name}</Typography>
-        <IconButton onClick={this.handleDelete}>Delete <DeleteForever /></IconButton>
-        <IconButton onClick={this.handleClose}>Cancel <Cancel /></IconButton>
+        <IconButton color="secondary" onClick={this.handleDelete}>Delete <DeleteForever /></IconButton>
+        <IconButton color="primary" onClick={this.handleClose}>Cancel <Cancel /></IconButton>
       </Dialog>
     </div>
   );

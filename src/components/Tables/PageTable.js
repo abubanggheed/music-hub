@@ -70,8 +70,8 @@ class SongTable extends Component {
                 <TableCell>{song.type}</TableCell>
                 <TableCell>{song.artist}</TableCell>
                 <TableCell><PlayButton song={song} /></TableCell>
-                {this.props.owner && <TableCell><IconButton onClick={() => this.handleDelete(song)}><DeleteForever /></IconButton></TableCell>}
-                <TableCell><IconButton onClick={() => this.handleDownload(song)}><CloudDownload /></IconButton></TableCell>
+                {this.props.owner && <TableCell><IconButton color="secondary" onClick={() => this.handleDelete(song)}><DeleteForever /></IconButton></TableCell>}
+                <TableCell><IconButton color="primary" onClick={() => this.handleDownload(song)}><CloudDownload /></IconButton></TableCell>
               </TableRow>
             ))}
             {this.props.table.filter(song => song.type !== 'head').map(song => (
@@ -80,9 +80,9 @@ class SongTable extends Component {
                 <TableCell>{song.type}</TableCell>
                 <TableCell>{song.artist || 'anonymous'}</TableCell>
                 <TableCell><PlayButton song={song} /></TableCell>
-                {this.props.owner && <TableCell><IconButton onClick={() => this.handleDelete(song)}><DeleteForever /></IconButton></TableCell>}
-                <TableCell><IconButton onClick={() => this.handleDownload(song)}><CloudDownload /></IconButton></TableCell>
-                {this.props.owner && <TableCell><IconButton onClick={() => this.handleChoose(song)}><ArrowUpwardOutlined /></IconButton></TableCell>}
+                {this.props.owner && <TableCell><IconButton color="secondary" onClick={() => this.handleDelete(song)}><DeleteForever /></IconButton></TableCell>}
+                <TableCell><IconButton color="primary" onClick={() => this.handleDownload(song)}><CloudDownload /></IconButton></TableCell>
+                {this.props.owner && <TableCell><IconButton color="secondary" onClick={() => this.handleChoose(song)}><ArrowUpwardOutlined /></IconButton></TableCell>}
               </TableRow>
             ))}
           </TableBody>
@@ -93,7 +93,7 @@ class SongTable extends Component {
             {this.props.urls.mp3Status && <pre><IconButton onClick={() => this.handleFile({ type: 'mp3', id: this.props.urls.id })}><MusicNote />Get mp3</IconButton></pre>}
             {this.props.urls.wavStatus && <pre><IconButton onClick={() => this.handleFile({ type: 'wav', id: this.props.urls.id })}><MusicNoteSharp />Get wav</IconButton></pre>}
             {this.props.urls.productionStatus && <pre><IconButton onClick={() => this.handleFile({ type: 'production', id: this.props.urls.id })}><FileCopy />Get production file</IconButton></pre>}
-            <IconButton onClick={this.handleCancel}><CancelOutlined />Cancel</IconButton>
+            <IconButton color="secondary" onClick={this.handleCancel}><CancelOutlined />Cancel</IconButton>
           </DialogContent>
         </Dialog>
         <DownloadFooter />

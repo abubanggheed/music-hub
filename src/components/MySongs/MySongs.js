@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import Songs from '../Tables/SongTable';
 
 class MySongs extends Component {
@@ -18,7 +17,6 @@ class MySongs extends Component {
         <h1 id="welcome">
           { this.props.user.username }'s Songs
         </h1>
-        <LogOutButton className="log-in" />
         <Songs />
       </div>
     );

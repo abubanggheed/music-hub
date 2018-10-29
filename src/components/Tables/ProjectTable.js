@@ -31,7 +31,7 @@ class ProjectTable extends Component {
                 <TableCell>{project.number}</TableCell>
                 <TableCell>{project.head !== null && <PlayButton song={{ id: project.head }} />}</TableCell>
                 <TableCell><ProjectButton page={project.id} /></TableCell>
-                <TableCell><IconButton onClick={() => this.handleDelete(project)}><DeleteSweep /></IconButton></TableCell>
+                <TableCell><IconButton color="secondary" onClick={() => this.handleDelete(project)}><DeleteSweep /></IconButton></TableCell>
               </TableRow>
             ))}
           </TableBody>

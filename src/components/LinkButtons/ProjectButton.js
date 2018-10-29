@@ -16,7 +16,7 @@ class ProjectButton extends Component {
     render() {
         return (
             <div>
-                <IconButton onClick={this.handleClick}><SubdirectoryArrowLeftTwoTone /></IconButton>
+                <IconButton color="secondary" onClick={this.handleClick}><SubdirectoryArrowLeftTwoTone /></IconButton>
             </div>
         );
     }

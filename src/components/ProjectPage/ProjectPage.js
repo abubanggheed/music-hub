@@ -84,11 +84,11 @@ class ProjectPage extends Component {
             <InputLabel>production file (zip)<Input accept=".zip" name="production" files={this.state.newUpload.production} onChange={this.handleChange('production')} type="file" /></InputLabel>
             <Input type="submit" value="upload files" />
           </form>
-          <IconButton onClick={this.cancleUpload}><Cancel />Cancle</IconButton>
+          <IconButton color="secondary" onClick={this.cancleUpload}><Cancel />Cancle</IconButton>
         </Dialog>
         <Songs project_id={this.props.info.project_id}
           owner={this.props.user.username === this.props.info.username} />
-        <IconButton onClick={this.addRemix}><CloudUpload /> Add Remix</IconButton>
+        <IconButton color="primary" onClick={this.addRemix}><CloudUpload /> Add Remix</IconButton>
       </div>
     );
   }
