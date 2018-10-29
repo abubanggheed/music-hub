@@ -17,7 +17,7 @@ class ProjectForm extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        this.props.dispatch({ type: 'NEW_PROJECT', payload: this.state.projectName });
+        this.props.dispatch({ type: 'NEW_PROJECT', payload: {name: this.state.projectName, user: this.props.user.id } });
         this.setState({
             projectName: '',
         });
@@ -41,6 +41,6 @@ class ProjectForm extends Component {
     }
 }
 
+const mapStateToProps = ({ user }) => ({ user });
 
-// this allows us to use <App /> in index.js
-export default connect()(withRouter(ProjectForm));
+export default connect(mapStateToProps)(withRouter(ProjectForm));

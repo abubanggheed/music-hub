@@ -107,11 +107,23 @@ router.put('/head/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-    pool.query(`DELETE FROM project WHERE id = $1 AND person_id = $2;`, [req.params.id, req.user.id])
-    .then( result => {
-        res.sendStatus(200);
+    pool.query(`SELECT COUNT(song.project_id) FROM project
+    LEFT OUTER JOIN song ON song.project_id = project.id
+    WHERE project.id = $1
+    GROUP BY project.id;`, [req.params.id]).then( result => {
+        if (result.rows[0].count == 0 ){
+            pool.query(`DELETE FROM project WHERE id = $1 AND person_id = $2;`, [req.params.id, req.user.id])
+            .then( result => {
+                res.sendStatus(200);
+            }).catch( error => {
+                console.log('error in delete project:', error);
+                res.sendStatus(500);
+            });
+        } else{
+            res.sendStatus(204);
+        }
     }).catch( error => {
-        console.log('failed to delete project:', error);
+        console.log( 'there was a fatal error:', error);
         res.sendStatus(500);
     });
 });

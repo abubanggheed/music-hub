@@ -30,7 +30,8 @@ function* projects(action) {
 
 function* addProject(action) {
   try {
-    yield axios.post('api/project', { name: action.payload });
+    yield axios.post('api/project', { name: action.payload.name });
+    yield dispatch({ type: 'MY_PROJECTS', payload: action.payload.user})
   } catch (error) {
     console.log('Error with project posts:', error);
   }
@@ -59,7 +60,7 @@ function* deleteSongs(action) {
       type: 'DELETE_SONG', payload: {
         id: song.id,
         project_id: action.payload.project_id,
-        next: { type: 'DO_NOTHING' },
+        next: { type: 'DELETE_PROJECT_DB', payload: {id: action.payload.id, user: action.payload.user} },
       }
     });
   }
@@ -69,10 +70,21 @@ function* removeProject(action) {
   try {
     const response = yield axios.get('api/song/project/' + action.payload.id);
     yield dispatch({ type: 'DELETE_ALL', payload: { ...action.payload, songs: response.data } });
-    yield axios.delete('api/project/' + action.payload.id);
+    yield dispatch({ type: 'DELETE_PROJECT_DB', payload: action.payload });
     yield dispatch({ type: 'MY_PROJECTS', payload: action.payload.user });
   } catch (error) {
     console.log('Error removing project:', error);
+  }
+}
+
+function* apiRemoveProject(action) {
+  try {
+    const response = yield axios.delete('api/project/' + action.payload.id);
+    if (response.status === 200){
+      yield dispatch({ type: 'MY_PROJECTS', payload: action.payload.user });
+    }
+  } catch (error) {
+    console.log('could not get into database:', error);
   }
 }
 
@@ -84,6 +96,7 @@ function* projectSaga() {
   yield takeLatest('FIX_HEAD', fixHead);
   yield takeLatest('DELETE_PROJECT', removeProject);
   yield takeLatest('DELETE_ALL', deleteSongs);
+  yield takeLatest('DELETE_PROJECT_DB', apiRemoveProject);
 }
 
 export default projectSaga;
