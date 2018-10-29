@@ -71,7 +71,7 @@ class App extends Component {
                   path="/newProject"
                   component={ProjectForm}
                 />
-                <ProtectedRoute
+                <Route
                   exact
                   path="/info"
                   component={InfoPage}

@@ -71,10 +71,10 @@ class ProjectPage extends Component {
   render() {
     return (
       <div>
-        <h1 id="welcome">
+        <h1 className="welcome">
           {this.props.info.name}
         </h1>
-        <h2>Creator: {this.props.info.username}</h2>
+        <h2 className="welcome">Creator: {this.props.info.username}</h2>
         <Dialog open={this.state.uploadDialog}>
           <Typography variant="h5">New Remix</Typography>
           <form onSubmit={this.handleSubmit}>

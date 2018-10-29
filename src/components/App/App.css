@@ -48,3 +48,8 @@ input {
     border-bottom:1px solid #402040; 
     cursor: pointer;
 }
+ .welcome {
+     font-family: fantasy;
+     color: #402040;
+     text-align: center;
+ }

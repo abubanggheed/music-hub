@@ -11,7 +11,7 @@ class Explore extends Component {
   render() {
     return (
       <div>
-        <h1 id="welcome">
+        <h1 className="welcome">
           Explore
         </h1>
         <Projects />
@@ -20,12 +20,8 @@ class Explore extends Component {
   }
 }
 
-// Instead of taking everything from state, we just want the user info.
-// if you wanted you could write this code like this:
-// const mapStateToProps = ({user}) => ({ user });
 const mapStateToProps = state => ({
   table: state.table,
 });
 
-// this allows us to use <App /> in index.js
 export default connect(mapStateToProps)(Explore);

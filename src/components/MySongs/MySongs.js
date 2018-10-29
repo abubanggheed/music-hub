@@ -14,7 +14,7 @@ class MySongs extends Component {
   render() {
     return (
       <div>
-        <h1 id="welcome">
+        <h1 className="welcome">
           { this.props.user.username }'s Songs
         </h1>
         <Songs />

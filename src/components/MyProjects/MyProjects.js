@@ -12,7 +12,7 @@ class MyProjects extends Component {
   render() {
     return (
       <div>
-        <h1 id="welcome">
+        <h1 className="welcome">
           { this.props.user.username }'s Projects
         </h1>
         <Projects />
