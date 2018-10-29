@@ -37,7 +37,7 @@ class SongTable extends Component {
       type: 'DELETE_SONG', payload: {
         ...this.state.manage.song,
         user_id: this.props.user.id,
-        next: { type: 'MY_SONGS', payload: this.props.user_id },
+        next: { type: 'MY_SONGS', payload: this.props.user.id },
     }
 });
 this.handleClose();
