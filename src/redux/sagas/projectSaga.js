@@ -82,9 +82,11 @@ function* apiRemoveProject(action) {
     const response = yield axios.delete('api/project/' + action.payload.id);
     if (response.status === 200){
       yield dispatch({ type: 'MY_PROJECTS', payload: action.payload.user });
+      yield dispatch({ type: 'PROJECT_CONFIRM_DELETE'});
     }
   } catch (error) {
     console.log('could not get into database:', error);
+    yield dispatch({ type: 'PROJECT_DELETE_ERROR'});
   }
 }
 

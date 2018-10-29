@@ -8,6 +8,7 @@ import PlayButton from '../LinkButtons/PlayButton';
 class ProjectTable extends Component {
 
   handleDelete = project => {
+    this.props.dispatch({ type: 'START_PROJECT_DELETE' });
     this.props.dispatch({ type: 'DELETE_PROJECT', payload: {id: project.id, user: this.props.user.id} });
   }
 

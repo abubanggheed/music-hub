@@ -4,6 +4,9 @@ const infoReducer = (state = {
     uploadError: false,
     downloading: false,
     downloadError: false,
+    projectDeleting: false,
+    projectDeletingComplete: false,
+    projectDeletingError: false,
 }, action) => {
     switch (action.type) {
         case 'START_UPLOAD':
@@ -56,6 +59,32 @@ const infoReducer = (state = {
             return {
                 ...state,
                 downloadError: false,
+            }
+        case 'START_PROJECT_DELETE':
+            return {
+                ...state,
+                projectDeleting: true,
+            };
+        case 'PROJECT_CONFIRM_DELETE':
+            return {
+                ...state,
+                projectDeleting: false,
+                projectDeletingComplete: true,
+            }
+        case 'PROJECT_FINISH_DELETE':
+            return {
+                ...state,
+                projectDeletingComplete: false,
+            }
+        case 'PROJECT_DELETE_ERROR':
+            return {
+                ...state,
+                projectDeletingError: true,
+            }
+        case 'PROJECT_CONFIRM_ERROR':
+            return {
+                ...state,
+                projectDeletingError: false,
             }
         default:
             return state;
