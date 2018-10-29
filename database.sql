@@ -16,12 +16,12 @@ CREATE TABLE song (
     id SERIAL PRIMARY KEY,
     creator INT REFERENCES person DEFAULT NULL,
     "name" VARCHAR(30) NOT NULL,
-    "type" VARCHAR(5) DEFAULT "remix",
+    "type" VARCHAR(5) DEFAULT 'remix',
     "project_id" INT REFERENCES project,
     last_update TIMESTAMP DEFAULT LOCALTIMESTAMP
 );
 
-CREATE TABLE url (
+CREATE TABLE "url" (
 	id SERIAL PRIMARY KEY,
 	song_id INT REFERENCES song,
 	mp3_url VARCHAR(500),

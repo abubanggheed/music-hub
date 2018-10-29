@@ -22,6 +22,11 @@ Delete config.js in the src folder, and replace it with one of your own making. 
 
 If you are using a firebase storage, I recomend deleting the content of config.js from lines 5 through 10, and replacing them with your own configurations.
 
+### Database
+Create a new postgresql database called music_hub. In that database, create the tables written in database.sql.
+
+### Run on local host
+
 To run the site, use the two following built in scripts:
 
 ```npm run server```
