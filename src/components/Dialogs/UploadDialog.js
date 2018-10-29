@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Dialog, Typography, IconButton } from '@material-ui/core';
 import { CheckCircle, Error } from '@material-ui/icons';
 
-const LoadingDialog = props => {
+const UploadDialog = props => {
     return (
         <div>
             <Dialog open={props.messages.uploading}>
@@ -34,4 +34,4 @@ const LoadingDialog = props => {
 
 const mapStateToProps = ({ messages }) => ({ messages });
 
-export default connect(mapStateToProps)(LoadingDialog);
+export default connect(mapStateToProps)(UploadDialog);

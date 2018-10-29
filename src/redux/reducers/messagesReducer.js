@@ -2,6 +2,8 @@ const infoReducer = (state = {
     uploading: false,
     uploadingComplete: false,
     uploadError: false,
+    downloading: false,
+    downloadError: false,
 }, action) => {
     switch (action.type) {
         case 'START_UPLOAD':
@@ -29,6 +31,31 @@ const infoReducer = (state = {
             return {
                 ...state,
                 uploadError: false,
+            }
+        case 'START_DOWNLOAD':
+            return {
+                ...state,
+                downloading: true,
+            };
+        case 'FINISH_DOWNLOAD':
+            return {
+                ...state,
+                downloading: false,
+            }
+        case 'CONFIRM_DOWNLOAD':
+            return {
+                ...state,
+                downloadingComplete: false,
+            }
+        case 'DOWNLOAD_ERROR':
+            return {
+                ...state,
+                downloadError: true,
+            }
+        case 'CONFIRM_DOWNLOAD_ERROR':
+            return {
+                ...state,
+                downloadError: false,
             }
         default:
             return state;

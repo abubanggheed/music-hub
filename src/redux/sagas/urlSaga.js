@@ -20,6 +20,7 @@ function* urlAvailability(action) {
 
 function* urlGet(action) {
     try {
+        yield dispatch({ type: 'START_DOWNLOAD' });
         yield dispatch({ type: 'CLEAR_DOWNLOAD' });
         const response = yield axios({
             method: 'GET',
@@ -28,6 +29,7 @@ function* urlGet(action) {
         });
         const downloadUrl = yield getdownloadUrl(response.data);
         yield dispatch({ type: 'SET_DOWNLOAD', payload: downloadUrl });
+        yield dispatch({ type: 'FINISH_DOWNLOAD' });
     } catch (error) {
         console.log('error in download url:', error);
     }

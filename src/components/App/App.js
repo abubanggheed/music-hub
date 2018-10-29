@@ -22,7 +22,7 @@ import Explore from '../Explore/Explore';
 import ProjectForm from '../ProjectForm/ProjectForm';
 import ProjectPage from '../ProjectPage/ProjectPage';
 import ActiveAudio from '../ActiveAudio/ActiveAudio';
-import UploadDialog from '../Dialogs/UploadDialog';
+import Dialogs from '../Dialogs/AllDialogs';
 import { lightBlue, deepPurple, blueGrey } from '@material-ui/core/colors';
 
 import './App.css';
@@ -99,7 +99,7 @@ class App extends Component {
                 <Route render={() => <h1>404</h1>} />
               </Switch>
             <ActiveAudio />
-            <UploadDialog />
+            <Dialogs />
             <Footer />
           </div>
         </Router>
