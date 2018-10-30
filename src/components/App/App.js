@@ -48,56 +48,56 @@ class App extends Component {
       <MuiThemeProvider theme={theme}>
         <Router>
           <div>
-              <Nav />
-              <Switch>
-                <Redirect exact from="/" to="/home" />
-                <Route
-                  exact
-                  path="/about"
-                  component={AboutPage}
-                />
-                <Route
-                  exact
-                  path="/explore"
-                  component={Explore}
-                />
-                <ProtectedRoute
-                  exact
-                  path="/home"
-                  component={UserPage}
-                />
-                <ProtectedRoute
-                  exact
-                  path="/newProject"
-                  component={ProjectForm}
-                />
-                <Route
-                  exact
-                  path="/info"
-                  component={InfoPage}
-                />
-                <ProtectedRoute
-                  exact
-                  path="/projects"
-                  component={MyProjects}
-                />
-                <ProtectedRoute
-                  exact
-                  path="/songs"
-                  component={MySongs}
-                />
-                <Route
-                  exact
-                  path="/explore"
-                  component={Explore}
-                />
-                <Route
-                  path="/explore/:id"
-                  component={ProjectPage}
-                />
-                {/* If none of the other routes matched, we will show a 404. */}
-                <Route render={() => <h1>404</h1>} />
-              </Switch>
+            <Nav />
+            <Switch>
+              <Redirect exact from="/" to="/home" />
+              <Route
+                exact
+                path="/about"
+                component={AboutPage}
+              />
+              <Route
+                exact
+                path="/explore"
+                component={Explore}
+              />
+              <ProtectedRoute
+                exact
+                path="/home"
+                component={UserPage}
+              />
+              <ProtectedRoute
+                exact
+                path="/newProject"
+                component={ProjectForm}
+              />
+              <Route
+                exact
+                path="/info"
+                component={InfoPage}
+              />
+              <ProtectedRoute
+                exact
+                path="/projects"
+                component={MyProjects}
+              />
+              <ProtectedRoute
+                exact
+                path="/songs"
+                component={MySongs}
+              />
+              <Route
+                exact
+                path="/explore"
+                component={Explore}
+              />
+              <Route
+                path="/explore/:id"
+                component={ProjectPage}
+              />
+              {/* If none of the other routes matched, we will show a 404. */}
+              <Route render={() => <h1>404</h1>} />
+            </Switch>
             <ActiveAudio />
             <Dialogs />
             <Footer />
