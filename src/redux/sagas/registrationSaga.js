@@ -18,6 +18,7 @@ function* registerUser(action) {
     yield dispatch({type: 'SET_TO_LOGIN_MODE'});
   } catch (error) {
       console.log('Error with user registration:', error);
+      yield dispatch({ type: 'OPEN_REGISTRATION_ERROR' });
       yield dispatch({type: 'REGISTRATION_FAILED'});
   }
 }

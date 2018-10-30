@@ -7,6 +7,8 @@ const infoReducer = (state = {
     projectDeleting: false,
     projectDeletingComplete: false,
     projectDeletingError: false,
+    loginError: false,
+    registrationError: false,
 }, action) => {
     switch (action.type) {
         case 'START_UPLOAD':
@@ -85,6 +87,26 @@ const infoReducer = (state = {
             return {
                 ...state,
                 projectDeletingError: false,
+            }
+        case 'CLEAR_LOGIN_ERROR':
+            return {
+                ...state,
+                loginError: false,
+            }
+        case 'OPEN_LOGIN_ERROR':
+            return {
+                ...state,
+                loginError: true,
+            }
+        case 'CLEAR_REGISTRATION_ERROR':
+            return {
+                ...state,
+                registrationError: false,
+            }
+        case 'OPEN_REGISTRATION_ERROR':
+            return {
+                ...state,
+                registrationError: true,
             }
         default:
             return state;

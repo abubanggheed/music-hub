@@ -23,6 +23,7 @@ function* loginUser(action) {
   } catch (error) {
     console.log('Error with user login:', error);
     if (error.response.status === 401) {
+      yield dispatch({ type: 'OPEN_LOGIN_ERROR' });
       // The 401 is the error status sent from passport
       // if user isn't in the database or
       // if the username and password don't match in the database

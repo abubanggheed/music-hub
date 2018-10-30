@@ -23,6 +23,7 @@ class RegisterPage extends Component {
       });
     } else {
       this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
+      this.props.dispatch({type: 'OPEN_REGISTRATION_ERROR'});
     }
   } // end registerUser
 
@@ -35,14 +36,6 @@ class RegisterPage extends Component {
   render() {
     return (
       <div>
-        {this.props.errors.registrationMessage && (
-          <h2
-            className="alert"
-            role="alert"
-          >
-            {this.props.errors.registrationMessage}
-          </h2>
-        )}
         <form onSubmit={this.registerUser}>
           <h1>Register User</h1>
           <div>

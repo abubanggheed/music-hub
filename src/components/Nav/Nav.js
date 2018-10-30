@@ -20,7 +20,7 @@ const Nav = (props) => (
         Explore
       </Link>
       <Link className="nav-link" to="/info">
-        Info Page
+        Info
       </Link>
       <Link className="nav-link" to="/about">
         About
