@@ -111,7 +111,8 @@ router.delete('/:id', (req, res) => {
     LEFT OUTER JOIN song ON song.project_id = project.id
     WHERE project.id = $1
     GROUP BY project.id;`, [req.params.id]).then( result => {
-        if (result.rows[0].count == 0 ){
+        console.log(result.rows);
+        if (result.rows[0].count === '0'){
             pool.query(`DELETE FROM project WHERE id = $1 AND person_id = $2;`, [req.params.id, req.user.id])
             .then( result => {
                 res.sendStatus(200);

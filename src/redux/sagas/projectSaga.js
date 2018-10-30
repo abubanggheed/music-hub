@@ -54,24 +54,18 @@ function* fixHead(action) {
   }
 }
 
-function* deleteSongs(action) {
-  for (let song of action.payload.songs) {
-    yield dispatch({
-      type: 'DELETE_SONG', payload: {
-        id: song.id,
-        project_id: action.payload.project_id,
-        next: { type: 'DELETE_PROJECT_DB', payload: {id: action.payload.id, user: action.payload.user} },
-      }
-    });
-  }
-}
-
 function* removeProject(action) {
   try {
     const response = yield axios.get('api/song/project/' + action.payload.id);
-    yield dispatch({ type: 'DELETE_ALL', payload: { ...action.payload, songs: response.data } });
-    yield dispatch({ type: 'DELETE_PROJECT_DB', payload: action.payload });
-    yield dispatch({ type: 'MY_PROJECTS', payload: action.payload.user });
+    if(response.data.length > 0) {
+      yield dispatch({ type: 'DELETE_SONG', payload: {
+         id: response.data[0].id,
+         project_id: action.payload.id,
+         next: action,
+        } });
+    } else {
+      yield dispatch({ type: 'DELETE_PROJECT_DB', payload: action.payload });
+    }
   } catch (error) {
     console.log('Error removing project:', error);
   }
@@ -97,7 +91,6 @@ function* projectSaga() {
   yield takeLatest('PROJECT_INFO', getInfo);
   yield takeLatest('FIX_HEAD', fixHead);
   yield takeLatest('DELETE_PROJECT', removeProject);
-  yield takeLatest('DELETE_ALL', deleteSongs);
   yield takeLatest('DELETE_PROJECT_DB', apiRemoveProject);
 }
 

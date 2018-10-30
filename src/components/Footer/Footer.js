@@ -11,7 +11,7 @@ class Footer extends Component {
   render() {
     return (
       <footer>
-        abubanggheed
+        by abubanggheed
   </footer>
     );
   }
