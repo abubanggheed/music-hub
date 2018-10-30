@@ -26,7 +26,8 @@ import Dialogs from '../Dialogs/AllDialogs';
 import { lightBlue, deepPurple, blueGrey } from '@material-ui/core/colors';
 
 import './App.css';
-
+//the theme chooses colors for the application. The typography section allows the
+//application to use the more up to date typography.
 const theme = createMuiTheme({
   typography: {
     useNextVariants: true,
@@ -40,15 +41,20 @@ const theme = createMuiTheme({
 
 class App extends Component {
   componentDidMount() {
+    //sees if there is existing user data stored in the browser, and automatically
+    //sends in that username and password.
     this.props.dispatch({ type: 'FETCH_USER' })
   }
 
   render() {
     return (
+      //the theme wraps everything so that all may have access to the colors.
       <MuiThemeProvider theme={theme}>
+      {/* the router tag wraps all routes that show up on the dom */}
         <Router>
           <div>
             <Nav />
+            {/* the nav bar goes here */}
             <Switch>
               <Redirect exact from="/" to="/home" />
               <Route
@@ -61,6 +67,9 @@ class App extends Component {
                 path="/explore"
                 component={Explore}
               />
+              {/* "protected" routes are only available for a logged in user.
+            A user probably wouldn't appreciate all the 403s from visiting these pages
+            when not logged in. */}
               <ProtectedRoute
                 exact
                 path="/home"
@@ -99,6 +108,7 @@ class App extends Component {
               <Route render={() => <h1>404</h1>} />
             </Switch>
             <ActiveAudio />
+            {/* here lie many dialogs that are managed by redux state */}
             <Dialogs />
             <Footer />
           </div>

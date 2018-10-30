@@ -8,7 +8,7 @@ class MyProjects extends Component {
   componentDidMount() {
     this.props.dispatch({type: 'MY_PROJECTS', payload: this.props.user.id});
   }
-
+//this component displays all projects that the user created.
   render() {
     return (
       <div>
@@ -16,18 +16,14 @@ class MyProjects extends Component {
           { this.props.user.username }'s Projects
         </h1>
         <Projects />
-        <NewProject />
+        <NewProject />{/* the new project button */}
       </div>
     );
   }
 }
 
-// Instead of taking everything from state, we just want the user info.
-// if you wanted you could write this code like this:
-// const mapStateToProps = ({user}) => ({ user });
 const mapStateToProps = state => ({
   user: state.user,
 });
 
-// this allows us to use <App /> in index.js
 export default connect(mapStateToProps)(MyProjects);

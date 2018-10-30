@@ -18,11 +18,11 @@ const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   loginMode, // will have a value of 'login' or 'registration' to control which screen is shown
   user, // will have an id and username if someone is logged in
-  table,
-  info,
-  url,
-  download,
-  messages,
+  table, //will have an array of all items to make a table out of
+  info, //will have some information about a particular project
+  url, //will hold urls for available downloads
+  download, //will hold the download url for the current download, and currently playing audio
+  messages, //will hold values to determine which dialog is open
 });
 
 export default rootReducer;

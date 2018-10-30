@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Songs from '../Tables/SongTable';
-
+//this component displays all songs the user uploaded
 class MySongs extends Component {
   logout = () => {
     this.props.dispatch({ type: 'LOGOUT' });

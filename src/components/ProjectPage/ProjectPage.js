@@ -29,7 +29,7 @@ class ProjectPage extends Component {
       uploadDialog: false,
     })
   }
-
+//handleChange sets a state to the file put into one of the 3 file inputs
   handleChange = param => event => {
     this.setState({
       ...this.state,
@@ -89,6 +89,7 @@ class ProjectPage extends Component {
         <Songs project_id={this.props.info.project_id}
           owner={this.props.user.username === this.props.info.username} />
         <IconButton color="primary" onClick={this.addRemix}><CloudUpload /> Add Remix</IconButton>
+        {/* this button opens the above dialog */}
       </div>
     );
   }

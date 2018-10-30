@@ -6,7 +6,7 @@ import { Button } from '@material-ui/core';
 
 class AnonymousButton extends Component {
 
-
+//this button does the exact same thing as the explore link on the navbar
     handleClick = () => {
         this.props.dispatch({type: 'PROJECTS' });
         this.props.history.push('/explore');

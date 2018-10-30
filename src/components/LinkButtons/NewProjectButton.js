@@ -6,7 +6,7 @@ import { FolderOpenOutlined } from '@material-ui/icons';
 
 class ProjectButton extends Component {
 
-
+//this button brings the user to the new project form
     handleClick = () => {
         this.props.history.push('/newProject');
     }

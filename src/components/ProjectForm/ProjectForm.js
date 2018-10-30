@@ -8,7 +8,7 @@ class ProjectForm extends Component {
     state = {
         projectName: '',
     }
-
+//the handleChange allows the user to type in the form and change local state
     handleChange = event => {
         this.setState({
             projectName: event.target.value,
@@ -23,7 +23,7 @@ class ProjectForm extends Component {
         });
         this.props.history.push('/projects');
     }
-
+//on submit, the right saga is triggered to add a new project under the user's name
     render() {
         return (
             <div>

@@ -57,13 +57,14 @@ class SongTable extends Component {
               <TableCell>Name</TableCell>
               <TableCell>Type</TableCell>
               <TableCell>Artist</TableCell>
-              <TableCell>Play</TableCell>
+              <TableCell>Play</TableCell>{/* only the owner may delete a song or chose a new head from
+              a project page. Better that only they see the buttons. */}
               {this.props.owner && <TableCell>Delete</TableCell>}
               <TableCell>Download</TableCell>
               {this.props.owner && <TableCell>Choose New Head</TableCell>}
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody>{/* the head is displayed at the top of the table */}
             {this.props.table.filter(song => song.type === 'head').map(song => (
               <TableRow key={song.id}>
                 <TableCell>{song.name}</TableCell>
@@ -73,7 +74,7 @@ class SongTable extends Component {
                 {this.props.owner && <TableCell><IconButton color="secondary" onClick={() => this.handleDelete(song)}><DeleteForever /></IconButton></TableCell>}
                 <TableCell><IconButton color="primary" onClick={() => this.handleDownload(song)}><CloudDownload /></IconButton></TableCell>
               </TableRow>
-            ))}
+            ))}{/* the remixes are displayed below */}
             {this.props.table.filter(song => song.type !== 'head').map(song => (
               <TableRow key={song.id}>
                 <TableCell>{song.name}</TableCell>
@@ -87,7 +88,7 @@ class SongTable extends Component {
             ))}
           </TableBody>
         </Table>
-        <Dialog open={this.state.downloadDialog}>
+        <Dialog open={this.state.downloadDialog}>{/* this dialog shows all files available for download, and offers a button that downloads them */}
           <Typography variant="h4">Available Downloads</Typography>
           <DialogContent>
             {this.props.urls.mp3Status && <pre><IconButton onClick={() => this.handleFile({ type: 'mp3', id: this.props.urls.id })}><MusicNote />Get mp3</IconButton></pre>}
@@ -101,7 +102,7 @@ class SongTable extends Component {
     );
   }
 }
-
+//all of the tables in the Tables folder reference the same reducer
 const mapStateToProps = state => ({
   table: state.table,
   urls: state.url,

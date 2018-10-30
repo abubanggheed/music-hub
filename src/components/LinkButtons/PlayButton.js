@@ -6,7 +6,8 @@ import { PlayCircleOutline } from '@material-ui/icons';
 
 class PlayButton extends Component {
 
-
+//this button exists almost everwhere, and triggers the process involved
+//with playing audio based on it's props
     handlePlay = () => {
         this.props.dispatch({ type: 'PLAY_SONG', payload: {
             id: this.props.song.id,

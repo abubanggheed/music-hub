@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Dialog, Typography, IconButton } from '@material-ui/core';
 import { CheckCircle, Error } from '@material-ui/icons';
-
+//Typography is a stylistic component that has no functional purpose
 const UploadDialog = props => {
     return (
         <div>

@@ -42,7 +42,7 @@ class ProjectTable extends Component {
                 <TableCell>{project.head && <PlayButton song={{id: project.head}} />}</TableCell>
                 <TableCell><ProjectButton page={project.id} /></TableCell>
               </TableRow>
-            ))}
+            ))}{/* this map makes an array of TableRows that are all rendered inside of the TableBody */}
           </TableBody>
         </Table>
       </div>

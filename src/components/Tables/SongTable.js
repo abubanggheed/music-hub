@@ -38,7 +38,7 @@ class SongTable extends Component {
         ...this.state.manage.song,
         user_id: this.props.user.id,
         next: { type: 'MY_SONGS', payload: this.props.user.id },
-    }
+    }//the next action triggers the saga that sets the table to the updated my songs table
 });
 this.handleClose();
   }
@@ -62,13 +62,14 @@ render() {
               <TableCell>{song.name}</TableCell>
               <TableCell>{song.type}</TableCell>
               <TableCell><PlayButton song={song} /></TableCell>
+              {/* the button below opens the dialog rendered under the table, and sets local state to keep data for that song */}
               <TableCell><IconButton color="secondary" onClick={() => this.handleManage(song)}><ViewCarouselSharp /></IconButton></TableCell>
               <TableCell><ProjectButton page={song.project_id} /></TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-      <Dialog open={this.state.manage.open}>
+      <Dialog open={this.state.manage.open}>{/* this dialog gives the user the ability to delete their own songs */}
         <Typography variant="h4">Manage {this.state.manage.song && this.state.manage.song.name}</Typography>
         <IconButton color="secondary" onClick={this.handleDelete}>Delete <DeleteForever /></IconButton>
         <IconButton color="primary" onClick={this.handleClose}>Cancel <Cancel /></IconButton>

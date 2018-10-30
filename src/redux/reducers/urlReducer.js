@@ -6,8 +6,7 @@ const urlReducer = (state = {}, action) => {
         return state;
     }
   };
+  //this reducer holds boolean values for which downloads are available
   
-  // user will be on the redux state at:
-  // state.user
   export default urlReducer;
   

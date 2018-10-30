@@ -20,8 +20,4 @@ class Explore extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  table: state.table,
-});
-
-export default connect(mapStateToProps)(Explore);
+export default connect()(Explore);

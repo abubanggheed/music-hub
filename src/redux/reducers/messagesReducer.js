@@ -10,6 +10,8 @@ const infoReducer = (state = {
     loginError: false,
     registrationError: false,
 }, action) => {
+    //each component of state corresponds to a dialog that lives on app.js
+    //on actions that trigger this reducer open or close one of these dialogs
     switch (action.type) {
         case 'START_UPLOAD':
             return {
