@@ -1,4 +1,6 @@
 import { put as dispatch, takeLatest } from 'redux-saga/effects';
+//put is imported as dispatch since "dispatch" describes what put does
+//better than "put"
 import axios from 'axios';
 
 // worker Saga: will be fired on "LOGIN" actions

@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const router = express.Router();
 
-
+//get all projects made by a specific user
 router.get('/user/:id', rejectUnauthenticated, (req, res) => {
     switch (req.user.id) {
         case Number(req.params.id):
@@ -23,7 +23,7 @@ router.get('/user/:id', rejectUnauthenticated, (req, res) => {
     }
 });
 
-
+//get all projects made by anyone. This route can be reached by the general public
 router.get('/', (req, res) => {
     pool.query(`SELECT project.id, project."name", person.username AS artist, COUNT(song.project_id) AS versions, head FROM project
     LEFT OUTER JOIN song ON song.project_id = project.id
@@ -38,6 +38,7 @@ router.get('/', (req, res) => {
         });
 });
 
+//obtains some data reguarding a specific project for future use.
 router.get('/info/:id', (req, res) => {
     pool.query(`SELECT "name", project.id AS project_id, username, person_id FROM project
     JOIN person ON project.person_id = person.id
@@ -49,7 +50,7 @@ router.get('/info/:id', (req, res) => {
         });
 });
 
-
+//new project
 router.post('/', (req, res) => {
     if (req.user) {
         pool.query(`INSERT INTO project (person_id, "name")
@@ -65,6 +66,7 @@ router.post('/', (req, res) => {
     }
 });
 
+//adds a head to a project
 router.post('/head/:id', (req, res) => {
     if (req.user) {
         pool.query(`UPDATE project
@@ -85,10 +87,12 @@ router.post('/head/:id', (req, res) => {
     }
 });
 
+//checks to see of the projects head reference still exists.
 router.put('/head/:id', (req, res) => {
     pool.query(`SELECT * FROM project
     JOIN song ON song.id = project.head
     WHERE project.id = $1;`, [req.params.id]).then(result => {
+        //if the head no longer exists, the head should be NULL
             if (result.rows.length === 0) {
                 pool.query(`SET head = NULL
             WHERE id = $1;`, [req.params.id]).then(result => {
@@ -106,6 +110,7 @@ router.put('/head/:id', (req, res) => {
         });
 });
 
+//removes a project. The use of req.user means that an unauthorized request deletes nothing
 router.delete('/:id', (req, res) => {
     pool.query(`DELETE FROM project WHERE id = $1 AND person_id = $2;`, [req.params.id, req.user.id])
         .then(result => {

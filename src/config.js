@@ -10,4 +10,7 @@ firebase.initializeApp({
   messagingSenderId: "921561837108"
 });
 
+//here lies the configuration for the firebase storage dump this application
+//uses.
+
 export default firebase;
