@@ -1,15 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProjectButton from '../LinkButtons/ProjectButton';
-import { Table, TableHead, TableBody, TableRow, TableCell, IconButton } from '@material-ui/core';
-import { DeleteSweep } from '@material-ui/icons';
+import { Table, TableHead, TableBody, TableRow, TableCell, IconButton, Dialog, Typography } from '@material-ui/core';
+import { DeleteSweep, Save } from '@material-ui/icons';
 import PlayButton from '../LinkButtons/PlayButton';
 
 class ProjectTable extends Component {
 
-  handleDelete = project => {
+
+  state={
+    confirmDelete: false,
+    projectToDelete: null,
+  }
+
+  handleDelete = () => {
     this.props.dispatch({ type: 'START_PROJECT_DELETE' });
-    this.props.dispatch({ type: 'DELETE_PROJECT', payload: {id: project.id, user: this.props.user.id} });
+    this.props.dispatch({ type: 'DELETE_PROJECT', payload: {id: this.state.projectToDelete.id, user: this.props.user.id} });
+    this.handleCancel();
+  }
+
+  handleDeleteButton = project => {
+    this.setState({
+      confirmDelete: true,
+      projectToDelete: project,
+    });
+  }
+
+  handleCancel = () => {
+    this.setState({
+      confirmDelete: false,
+      projectToDelete: null,
+    });
   }
 
   render() {
@@ -32,11 +53,17 @@ class ProjectTable extends Component {
                 <TableCell>{project.number}</TableCell>
                 <TableCell>{project.head !== null && <PlayButton song={{ id: project.head }} />}</TableCell>
                 <TableCell><ProjectButton page={project.id} /></TableCell>
-                <TableCell><IconButton color="secondary" onClick={() => this.handleDelete(project)}><DeleteSweep /></IconButton></TableCell>
+                <TableCell><IconButton color="secondary" onClick={() => this.handleDeleteButton(project)}><DeleteSweep /></IconButton></TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
+        <Dialog open={this.state.confirmDelete}>
+          <Typography variant="h4">Are you really going to delete an entire project?</Typography>
+          <Typography variant="body1">Deleting a project deletes all songs within it.</Typography>
+          <IconButton color="primary" onClick={this.handleCancel}><Save/>Maybe Not</IconButton>
+          <IconButton color="secondary" onClick={this.handleDelete}><DeleteSweep/>I do what I have to</IconButton>
+        </Dialog>
       </div>
     );
   }

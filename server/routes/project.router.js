@@ -44,7 +44,7 @@ router.get('/info/:id', (req, res) => {
     WHERE project.id = $1;`, [req.params.id])
         .then(response => {
             res.send(response.rows);
-        }).catch( error => {
+        }).catch(error => {
             res.sendStatus(500);
         });
 });
@@ -88,45 +88,32 @@ router.post('/head/:id', (req, res) => {
 router.put('/head/:id', (req, res) => {
     pool.query(`SELECT * FROM project
     JOIN song ON song.id = project.head
-    WHERE project.id = $1;`, [req.params.id]).then( result => {
-        if( result.rows.length === 0){
-            pool.query(`SET head = NULL
-            WHERE id = $1;`, [req.params.id]).then( result => {
+    WHERE project.id = $1;`, [req.params.id]).then(result => {
+            if (result.rows.length === 0) {
+                pool.query(`SET head = NULL
+            WHERE id = $1;`, [req.params.id]).then(result => {
+                        res.sendStatus(200);
+                    }).catch(error => {
+                        console.log('error setting head to null;', error);
+                        res.sendStatus(500);
+                    });
+            } else {
                 res.sendStatus(200);
-            }).catch( error => {
-                console.log('error setting head to null;', error);
-                res.sendStatus(500);
-            });
-        } else {
-            res.sendStatus(200);
-        }
-    }).catch( error => {
-        console.log('error in project song join:', error);
-        res.sendStatus(500);
-    });
+            }
+        }).catch(error => {
+            console.log('error in project song join:', error);
+            res.sendStatus(500);
+        });
 });
 
 router.delete('/:id', (req, res) => {
-    pool.query(`SELECT COUNT(song.project_id) FROM project
-    LEFT OUTER JOIN song ON song.project_id = project.id
-    WHERE project.id = $1
-    GROUP BY project.id;`, [req.params.id]).then( result => {
-        console.log(result.rows);
-        if (result.rows[0].count === '0'){
-            pool.query(`DELETE FROM project WHERE id = $1 AND person_id = $2;`, [req.params.id, req.user.id])
-            .then( result => {
-                res.sendStatus(200);
-            }).catch( error => {
-                console.log('error in delete project:', error);
-                res.sendStatus(500);
-            });
-        } else{
-            res.sendStatus(204);
-        }
-    }).catch( error => {
-        console.log( 'there was a fatal error:', error);
-        res.sendStatus(500);
-    });
+    pool.query(`DELETE FROM project WHERE id = $1 AND person_id = $2;`, [req.params.id, req.user.id])
+        .then(result => {
+            res.sendStatus(200);
+        }).catch(error => {
+            console.log('error in delete project:', error);
+            res.sendStatus(500);
+        });
 });
 
 module.exports = router;

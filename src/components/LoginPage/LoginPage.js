@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Input, InputLabel } from '@material-ui/core';
+import AnonymousButton from '../LinkButtons/AnonymousButton';
 
 class LoginPage extends Component {
   state = {
@@ -78,10 +79,13 @@ class LoginPage extends Component {
           <Button
             variant="contained"
             color="primary"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
+            onClick={() => { this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}
           >
             Register
           </Button>
+          <pre>
+            <AnonymousButton />
+          </pre>
         </center>
       </div>
     );
