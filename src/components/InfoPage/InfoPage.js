@@ -10,7 +10,7 @@ const InfoPage = () => (
     </p>
     <p>
       Do note that anything you upload to this site is available for download by any user. Do not rely on this
-      site to hold or distribute personal projects as it may be coppied or manipulated by any person with a computer.
+      site to hold or distribute personal projects as they may be coppied or manipulated by any person with a computer.
     </p>
     <p>
       If you have an pressing issue with this site, post an issue here:

@@ -12,7 +12,7 @@ class UserPage extends Component {
       <div>
         <LogOutButton className="log-in" />
         <h1 className="welcome">
-          Welcome, {this.props.user.username}!
+          You are logged in, {this.props.user.username}!
         </h1>
       </div>
     );

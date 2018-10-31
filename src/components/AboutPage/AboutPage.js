@@ -9,11 +9,11 @@ const AboutPage = () => (
       </p>
       <p>
         I encourage you to try and contribute to other peoples projects. This site
-        is not for showing of your skills, but exchanging ideas, no matter how small or
+        is not for showing off your skills, but exchanging ideas, no matter how small or
         unfinished they may be.
       </p>
       <p>
-        I hope this site brings you many opportunities juice your creativity!
+        I hope this site brings you many opportunities to juice your creativity!
       </p>
       <pre>
         -- abubanggheed
