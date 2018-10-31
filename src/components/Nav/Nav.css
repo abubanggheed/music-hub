@@ -17,11 +17,11 @@
   float: left;
   color: #f2f2f2;
   background-color: #101085;
-  text-align: center;
+  text-align: left;
   padding: 24px 10px;
   text-decoration: none;
   font-size: 15px;
-
+  width: 100%;
   border:none;
   cursor: pointer;
   outline:0;
