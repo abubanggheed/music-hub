@@ -20,7 +20,7 @@ class ProjectTable extends Component {
     return (
       <div>
         <InputLabel>
-          Search by Name: {' '}
+          Filter by Name: {' '}
           <Input type="text" value={this.state.filter} onChange={this.handleChange} />
         </InputLabel>
         <Paper>
