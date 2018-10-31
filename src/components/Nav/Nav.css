@@ -10,7 +10,7 @@
 .nav {
   overflow: hidden;
   background-color: #101085;
-  height: 100%;
+  height: 100vh;
 }
 
 .nav-link {
@@ -29,8 +29,4 @@
 
 .nav-link:hover {
   background-color: #2068aa;
-}
-
-.nav-right {
-  float: right;
 }

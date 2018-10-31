@@ -9,7 +9,6 @@ import {
 import { connect } from 'react-redux';
 import { createMuiTheme, MuiThemeProvider, Grid } from '@material-ui/core';
 import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
@@ -113,7 +112,6 @@ class App extends Component {
               <ActiveAudio />
               {/* here lie many dialogs that are managed by redux state */}
               <Dialogs />
-              <Footer />
             </Grid>
           </Grid>
         </Router>
