@@ -8,14 +8,14 @@ import PlayButton from '../LinkButtons/PlayButton';
 class ProjectTable extends Component {
 
 
-  state={
+  state = {
     confirmDelete: false,
     projectToDelete: null,
   }
 
   handleDelete = () => {
     this.props.dispatch({ type: 'START_PROJECT_DELETE' });
-    this.props.dispatch({ type: 'DELETE_PROJECT', payload: {id: this.state.projectToDelete.id, user: this.props.user.id} });
+    this.props.dispatch({ type: 'DELETE_PROJECT', payload: { id: this.state.projectToDelete.id, user: this.props.user.id } });
     this.handleCancel();
   }
 
@@ -35,36 +35,45 @@ class ProjectTable extends Component {
 
   render() {
     return (
-      <Paper>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Stored Versions</TableCell>
-              <TableCell>Play Head</TableCell>
-              <TableCell>Go</TableCell>
-              <TableCell>Delete</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {this.props.table.map(project => (
-              <TableRow key={project.id}>
-                <TableCell>{project.name}</TableCell>
-                <TableCell>{project.number}</TableCell>
-                <TableCell>{project.head !== null && <PlayButton song={{ id: project.head }} />}</TableCell>
-                <TableCell><ProjectButton page={project.id} /></TableCell>
-                <TableCell><IconButton color="secondary" onClick={() => this.handleDeleteButton(project)}><DeleteSweep /></IconButton></TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+      <div>
+        {this.props.table.length > 0 ?
+          <Paper>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Name</TableCell>
+                  <TableCell>Stored Versions</TableCell>
+                  <TableCell>Play Head</TableCell>
+                  <TableCell>Go</TableCell>
+                  <TableCell>Delete</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {this.props.table.map(project => (
+                  <TableRow key={project.id}>
+                    <TableCell>{project.name}</TableCell>
+                    <TableCell>{project.number}</TableCell>
+                    <TableCell>{project.head !== null && <PlayButton song={{ id: project.head }} />}</TableCell>
+                    <TableCell><ProjectButton page={project.id} /></TableCell>
+                    <TableCell><IconButton color="secondary" onClick={() => this.handleDeleteButton(project)}><DeleteSweep /></IconButton></TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </Paper> :
+          <div>
+            <p>
+              You currently have no projects.
+              </p>
+          </div>}
+
         <Dialog open={this.state.confirmDelete}>
           <Typography variant="h4">Are you really going to delete an entire project?</Typography>
           <Typography variant="body1">Deleting a project deletes all songs within it.</Typography>
-          <IconButton color="primary" onClick={this.handleCancel}><Save/>Maybe Not</IconButton>
-          <IconButton color="secondary" onClick={this.handleDelete}><DeleteSweep/>I do what I have to</IconButton>
+          <IconButton color="primary" onClick={this.handleCancel}><Save />Maybe Not</IconButton>
+          <IconButton color="secondary" onClick={this.handleDelete}><DeleteSweep />I do what I have to</IconButton>
         </Dialog>
-      </Paper>
+      </div>
     );
   }
 }

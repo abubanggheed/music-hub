@@ -43,51 +43,57 @@ class SongTable extends Component {
     this.props.dispatch({
       type: 'DELETE_SONG', payload: {
         ...song, user_id: this.props.user.id,
-        next: { type: 'PROJECT_SONGS', payload: this.props.project_id},
+        next: { type: 'PROJECT_SONGS', payload: this.props.project_id },
       }
     });
   }
 
   render() {
     return (
-      <Paper>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Type</TableCell>
-              <TableCell>Artist</TableCell>
-              <TableCell>Play</TableCell>{/* only the owner may delete a song or chose a new head from
+      <div>
+        {this.props.table.length > 0 ?
+          <Paper>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Name</TableCell>
+                  <TableCell>Type</TableCell>
+                  <TableCell>Artist</TableCell>
+                  <TableCell>Play</TableCell>{/* only the owner may delete a song or chose a new head from
               a project page. Better that only they see the buttons. */}
-              {this.props.owner && <TableCell>Delete</TableCell>}
-              <TableCell>Download</TableCell>
-              {this.props.owner && <TableCell>Choose New Head</TableCell>}
-            </TableRow>
-          </TableHead>
-          <TableBody>{/* the head is displayed at the top of the table */}
-            {this.props.table.filter(song => song.type === 'head').map(song => (
-              <TableRow key={song.id}>
-                <TableCell>{song.name}</TableCell>
-                <TableCell>{song.type}</TableCell>
-                <TableCell>{song.artist}</TableCell>
-                <TableCell><PlayButton song={song} /></TableCell>
-                {this.props.owner && <TableCell><IconButton color="secondary" onClick={() => this.handleDelete(song)}><DeleteForever /></IconButton></TableCell>}
-                <TableCell><IconButton color="primary" onClick={() => this.handleDownload(song)}><CloudDownload /></IconButton></TableCell>
-              </TableRow>
-            ))}{/* the remixes are displayed below */}
-            {this.props.table.filter(song => song.type !== 'head').map(song => (
-              <TableRow key={song.id}>
-                <TableCell>{song.name}</TableCell>
-                <TableCell>{song.type}</TableCell>
-                <TableCell>{song.artist || 'anonymous'}</TableCell>
-                <TableCell><PlayButton song={song} /></TableCell>
-                {this.props.owner && <TableCell><IconButton color="secondary" onClick={() => this.handleDelete(song)}><DeleteForever /></IconButton></TableCell>}
-                <TableCell><IconButton color="primary" onClick={() => this.handleDownload(song)}><CloudDownload /></IconButton></TableCell>
-                {this.props.owner && <TableCell><IconButton color="secondary" onClick={() => this.handleChoose(song)}><ArrowUpwardOutlined /></IconButton></TableCell>}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+                  {this.props.owner && <TableCell>Delete</TableCell>}
+                  <TableCell>Download</TableCell>
+                  {this.props.owner && <TableCell>Choose New Head</TableCell>}
+                </TableRow>
+              </TableHead>
+              <TableBody>{/* the head is displayed at the top of the table */}
+                {this.props.table.filter(song => song.type === 'head').map(song => (
+                  <TableRow key={song.id}>
+                    <TableCell>{song.name}</TableCell>
+                    <TableCell>{song.type}</TableCell>
+                    <TableCell>{song.artist}</TableCell>
+                    <TableCell><PlayButton song={song} /></TableCell>
+                    {this.props.owner && <TableCell><IconButton color="secondary" onClick={() => this.handleDelete(song)}><DeleteForever /></IconButton></TableCell>}
+                    <TableCell><IconButton color="primary" onClick={() => this.handleDownload(song)}><CloudDownload /></IconButton></TableCell>
+                  </TableRow>
+                ))}{/* the remixes are displayed below */}
+                {this.props.table.filter(song => song.type !== 'head').map(song => (
+                  <TableRow key={song.id}>
+                    <TableCell>{song.name}</TableCell>
+                    <TableCell>{song.type}</TableCell>
+                    <TableCell>{song.artist || 'anonymous'}</TableCell>
+                    <TableCell><PlayButton song={song} /></TableCell>
+                    {this.props.owner && <TableCell><IconButton color="secondary" onClick={() => this.handleDelete(song)}><DeleteForever /></IconButton></TableCell>}
+                    <TableCell><IconButton color="primary" onClick={() => this.handleDownload(song)}><CloudDownload /></IconButton></TableCell>
+                    {this.props.owner && <TableCell><IconButton color="secondary" onClick={() => this.handleChoose(song)}><ArrowUpwardOutlined /></IconButton></TableCell>}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </Paper> :
+          <p>
+            This project has no songs.
+          </p>}
         <Dialog open={this.state.downloadDialog}>{/* this dialog shows all files available for download, and offers a button that downloads them */}
           <Typography variant="h4">Available Downloads</Typography>
           <DialogContent>
@@ -98,7 +104,7 @@ class SongTable extends Component {
           </DialogContent>
         </Dialog>
         <DownloadFooter />
-      </Paper>
+      </div>
     );
   }
 }
