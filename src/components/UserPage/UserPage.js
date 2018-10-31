@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
 
 class UserPage extends Component {
   logout = () => {
@@ -10,7 +9,6 @@ class UserPage extends Component {
   render() {
     return (
       <div>
-        <LogOutButton className="log-in" />
         <h1 className="welcome">
           You are logged in, {this.props.user.username}!
         </h1>

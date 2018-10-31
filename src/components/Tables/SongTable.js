@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProjectButton from '../LinkButtons/ProjectButton';
 import PlayButton from '../LinkButtons/PlayButton';
-import { Dialog, Typography, Table, TableHead, TableBody, TableRow, TableCell, IconButton } from '@material-ui/core';
+import { Dialog, Typography, Table, TableHead, TableBody, TableRow, TableCell, IconButton, Paper } from '@material-ui/core';
 import { ViewCarouselSharp, DeleteForever, Cancel } from '@material-ui/icons';
 
 class SongTable extends Component {
@@ -45,7 +45,7 @@ this.handleClose();
 
 render() {
   return (
-    <div>
+    <Paper>
       <Table>
         <TableHead>
           <TableRow>
@@ -74,7 +74,7 @@ render() {
         <IconButton color="secondary" onClick={this.handleDelete}>Delete <DeleteForever /></IconButton>
         <IconButton color="primary" onClick={this.handleClose}>Cancel <Cancel /></IconButton>
       </Dialog>
-    </div>
+    </Paper>
   );
 }
 }

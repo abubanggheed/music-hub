@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProjectButton from '../LinkButtons/ProjectButton';
-import { Table, TableHead, TableBody, TableRow, TableCell, IconButton, Dialog, Typography } from '@material-ui/core';
+import { Table, TableHead, TableBody, TableRow, TableCell, IconButton, Dialog, Typography, Paper } from '@material-ui/core';
 import { DeleteSweep, Save } from '@material-ui/icons';
 import PlayButton from '../LinkButtons/PlayButton';
 
@@ -35,7 +35,7 @@ class ProjectTable extends Component {
 
   render() {
     return (
-      <div>
+      <Paper>
         <Table>
           <TableHead>
             <TableRow>
@@ -64,7 +64,7 @@ class ProjectTable extends Component {
           <IconButton color="primary" onClick={this.handleCancel}><Save/>Maybe Not</IconButton>
           <IconButton color="secondary" onClick={this.handleDelete}><DeleteSweep/>I do what I have to</IconButton>
         </Dialog>
-      </div>
+      </Paper>
     );
   }
 }

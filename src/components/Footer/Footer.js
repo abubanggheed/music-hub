@@ -13,7 +13,7 @@ class Footer extends Component {
   render() {
     return (
       <footer>
-        by abubanggheed
+        <i>by abubanggheed</i>
   </footer>
     );
   }

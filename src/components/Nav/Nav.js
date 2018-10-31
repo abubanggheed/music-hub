@@ -1,45 +1,68 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { MenuItem, Paper } from '@material-ui/core';
 import LogOutButton from '../LogOutButton/LogOutButton';
+import { HomeOutlined, SearchSharp, InfoOutlined, PermDeviceInformation, FiberManualRecord, MusicVideo } from '@material-ui/icons'
 import './Nav.css';
 
 const Nav = (props) => (
-  <div className="nav">
-    <Link to="/home">
-      <h2 className="nav-title">Music Hub</h2>
-    </Link>
-    <div className="nav-right">
-      <Link className="nav-link" to="/home">
-        {/* Show this link if they are logged in or not,
+  <Paper>
+    <div className="nav">
+      <Link to="/home">
+        <h2 className="nav-title">Music Hub</h2>
+      </Link>
+      <div>
+        <MenuItem>
+          <Link className="nav-link" to="/home">
+            <HomeOutlined />
+            {/* Show this link if they are logged in or not,
         but call this link 'Home' if they are logged in,
         and call this link 'Login / Register' if they are not */}
-        {props.user.id ? 'Home' : 'Login / Register'}
-      </Link>
-      <Link className="nav-link" to="/explore">
-        Explore
-      </Link>
-      <Link className="nav-link" to="/info">
-        Info
-      </Link>
-      <Link className="nav-link" to="/about">
-        About
-      </Link>
-      {/* Show the link to the info page and the logout button if the user is logged in */}
-      {props.user.id && (
-        <>
-          <Link className="nav-link" to="/projects">
-            My Projects
+            {props.user.id ? 'Home' : 'Login / Register'}
           </Link>
-          <Link className="nav-link" to="/songs">
-            My Songs
-          </Link>
-          <LogOutButton className="nav-link" />
-        </>
-      )}
-      {/* Always show this link since the about page is not protected */}
+        </MenuItem>
+        <MenuItem>
+          <Link className="nav-link" to="/explore">
+            <SearchSharp />
+            Explore
+        </Link>
+        </MenuItem>
+        <MenuItem>
+          <Link className="nav-link" to="/info">
+            <InfoOutlined />
+            Info
+        </Link>
+        </MenuItem>
+        <MenuItem>
+          <Link className="nav-link" to="/about">
+            <PermDeviceInformation />
+            About
+        </Link>
+        </MenuItem>
+        {props.user.id && (
+          <>
+            <MenuItem>
+              <Link className="nav-link" to="/projects">
+                <FiberManualRecord />
+                My Projects
+            </Link>
+            </MenuItem>
+            <MenuItem>
+              <Link className="nav-link" to="/songs">
+                <MusicVideo />
+                My Songs
+            </Link>
+            </MenuItem>
+            <MenuItem>
+              <LogOutButton className="nav-link" />
+            </MenuItem>
+          </>
+        )}
+      </div>
     </div>
-  </div>
+  </Paper>
+
 );
 
 const mapStateToProps = state => ({

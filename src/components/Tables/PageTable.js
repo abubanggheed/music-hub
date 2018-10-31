@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import DownloadFooter from '../DownloadFooter/DownloadFooter';
 import PlayButton from '../LinkButtons/PlayButton';
 import { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
-import { IconButton, Dialog, DialogContent, Typography } from '@material-ui/core';
+import { IconButton, Dialog, DialogContent, Typography, Paper } from '@material-ui/core';
 import { CloudDownload, ArrowUpwardOutlined, CancelOutlined, MusicNote, MusicNoteSharp, FileCopy, DeleteForever } from '@material-ui/icons';
 
 class SongTable extends Component {
@@ -50,7 +50,7 @@ class SongTable extends Component {
 
   render() {
     return (
-      <div>
+      <Paper>
         <Table>
           <TableHead>
             <TableRow>
@@ -98,7 +98,7 @@ class SongTable extends Component {
           </DialogContent>
         </Dialog>
         <DownloadFooter />
-      </div>
+      </Paper>
     );
   }
 }

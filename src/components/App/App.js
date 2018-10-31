@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 import { connect } from 'react-redux';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
+import { createMuiTheme, MuiThemeProvider, Grid } from '@material-ui/core';
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
@@ -50,68 +50,72 @@ class App extends Component {
     return (
       //the theme wraps everything so that all may have access to the colors.
       <MuiThemeProvider theme={theme}>
-      {/* the router tag wraps all routes that show up on the dom */}
+        {/* the router tag wraps all routes that show up on the dom */}
         <Router>
-          <div>
-            <Nav />
-            {/* the nav bar goes here */}
-            <Switch>
-              <Redirect exact from="/" to="/home" />
-              <Route
-                exact
-                path="/about"
-                component={AboutPage}
-              />
-              <Route
-                exact
-                path="/explore"
-                component={Explore}
-              />
-              {/* "protected" routes are only available for a logged in user.
+          <Grid container>
+            <Grid container direction="column" sm={2} item>
+              <Nav />
+            </Grid>
+            <Grid container direction="column" sm={10} item>
+              {/* the nav bar goes here */}
+              <Switch>
+                <Redirect exact from="/" to="/home" />
+                <Route
+                  exact
+                  path="/about"
+                  component={AboutPage}
+                />
+                <Route
+                  exact
+                  path="/explore"
+                  component={Explore}
+                />
+                {/* "protected" routes are only available for a logged in user.
             A user probably wouldn't appreciate all the 403s from visiting these pages
             when not logged in. */}
-              <ProtectedRoute
-                exact
-                path="/home"
-                component={UserPage}
-              />
-              <ProtectedRoute
-                exact
-                path="/newProject"
-                component={ProjectForm}
-              />
-              <Route
-                exact
-                path="/info"
-                component={InfoPage}
-              />
-              <ProtectedRoute
-                exact
-                path="/projects"
-                component={MyProjects}
-              />
-              <ProtectedRoute
-                exact
-                path="/songs"
-                component={MySongs}
-              />
-              <Route
-                exact
-                path="/explore"
-                component={Explore}
-              />
-              <Route
-                path="/explore/:id"
-                component={ProjectPage}
-              />
-              {/* If none of the other routes matched, we will show a 404. */}
-              <Route render={() => <h1>404</h1>} />
-            </Switch>
-            <ActiveAudio />
-            {/* here lie many dialogs that are managed by redux state */}
-            <Dialogs />
-            <Footer />
-          </div>
+                <ProtectedRoute
+                  exact
+                  path="/home"
+                  component={UserPage}
+                />
+                <ProtectedRoute
+                  exact
+                  path="/newProject"
+                  component={ProjectForm}
+                />
+                <Route
+                  exact
+                  path="/info"
+                  component={InfoPage}
+                />
+                <ProtectedRoute
+                  exact
+                  path="/projects"
+                  component={MyProjects}
+                />
+                <ProtectedRoute
+                  exact
+                  path="/songs"
+                  component={MySongs}
+                />
+                <Route
+                  exact
+                  path="/explore"
+                  component={Explore}
+                />
+                <Route
+                  path="/explore/:id"
+                  component={ProjectPage}
+                />
+                {/* If none of the other routes matched, we will show a 404. */}
+                <Route render={() => <h1>404</h1>} />
+              </Switch>
+              <ActiveAudio />
+              {/* here lie many dialogs that are managed by redux state */}
+              <Dialogs />
+              <Footer />
+            </Grid>
+          </Grid>
         </Router>
       </MuiThemeProvider>
     )
