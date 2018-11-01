@@ -6,10 +6,6 @@ import './notifications.css';
 
 class NotificationPage extends Component {
 
-    componentDidMount() {
-        this.props.dispatch({ type: 'GET_NOTIFICATIONS' });
-    }
-
     handleDelete = id => {
         this.props.dispatch({ type: 'DELETE_NOTIFICATION', payload: id });
     }

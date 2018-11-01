@@ -28,10 +28,22 @@ function* clearNotifications(action) {
     }
 }
 
+function* uploadNotification(action) {
+    try {
+        yield axios({
+            method: 'POST',
+            url: '/api/notification/upload/' + action.payload,
+        });
+    } catch (error) {
+        console.log('error in adding notification:', error);
+    }
+}
+
 function* notificationSaga() {
     yield takeLatest('GET_NOTIFICATIONS', getNotifications);
     yield takeLatest('DELETE_NOTIFICATION', deleteNotification);
     yield takeLatest('CLEAR_NOTIFICATIONS', clearNotifications);
+    yield takeLatest('UPLOAD_NOTIFICATION', uploadNotification);
 }
 
 export default notificationSaga;

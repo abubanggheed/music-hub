@@ -43,7 +43,8 @@ class App extends Component {
   componentDidMount() {
     //sees if there is existing user data stored in the browser, and automatically
     //sends in that username and password.
-    this.props.dispatch({ type: 'FETCH_USER' })
+    this.props.dispatch({ type: 'FETCH_USER' });
+    this.props.dispatch({ type: 'GET_NOTIFICATIONS' });
   }
 
   render() {

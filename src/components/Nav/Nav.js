@@ -58,6 +58,7 @@ const Nav = (props) => (
             <Link className="nav-link" to="/notifications">
               <NotesOutlined />
               Notifications
+              {props.notifications.length > 0 && ` (${props.notifications.length})`}
             </Link>
           </MenuItem>
           <MenuItem>
@@ -74,6 +75,7 @@ const Nav = (props) => (
 
 const mapStateToProps = state => ({
   user: state.user,
+  notifications: state.notifications,
 });
 
 export default connect(mapStateToProps)(Nav);
