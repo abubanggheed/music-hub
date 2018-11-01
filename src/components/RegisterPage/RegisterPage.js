@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { Input, InputLabel, Button } from '@material-ui/core';
 
 class RegisterPage extends Component {
@@ -22,8 +22,8 @@ class RegisterPage extends Component {
         },
       });
     } else {
-      this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
-      this.props.dispatch({type: 'OPEN_REGISTRATION_ERROR'});
+      this.props.dispatch({ type: 'REGISTRATION_INPUT_ERROR' });
+      this.props.dispatch({ type: 'OPEN_REGISTRATION_ERROR' });
     }
   } // end registerUser
 
@@ -61,7 +61,7 @@ class RegisterPage extends Component {
             </InputLabel>
           </div>
           <div>
-          <InputLabel htmlFor="email">
+            <InputLabel htmlFor="email">
               Email:
               <Input
                 type="email"
@@ -81,11 +81,14 @@ class RegisterPage extends Component {
           </div>
         </form>
         <center>
+          <p>
+            Note: your email address will be ignored by this application except for special circumstances.
+          </p>
           <Button
             variant="contained"
             color="primary"
             className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}
+            onClick={() => { this.props.dispatch({ type: 'SET_TO_LOGIN_MODE' }) }}
           >
             Login
           </Button>
