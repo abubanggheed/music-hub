@@ -21,7 +21,7 @@ function* loginUser(action) {
     
     // after the user has logged in
     // get notifications for later
-    this.props.dispatch({ type: 'GET_NOTIFICATIONS' });
+    yield dispatch({ type: 'GET_NOTIFICATIONS' });
     // get the user information from the server
     yield dispatch({type: 'FETCH_USER'});
   } catch (error) {
