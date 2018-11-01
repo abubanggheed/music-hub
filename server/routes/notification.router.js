@@ -25,6 +25,16 @@ router.delete('/one/:id', rejectUnauthenticated, (req, res) => {
     });
 });
 
+router.delete('/all', rejectUnauthenticated, (req, res) => {
+    pool.query(`DELETE FROM notification WHERE person_id = $1;`, [req.user.id])
+    .then(result => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('error in deleting one notification:', error);
+        res.sendStatus(500);
+    });
+});
+
 
 
 

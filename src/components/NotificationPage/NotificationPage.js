@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Paper, IconButton } from '@material-ui/core';
+import { Paper, IconButton, Button } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
 import './notifications.css';
 
@@ -14,6 +14,10 @@ class NotificationPage extends Component {
         this.props.dispatch({ type: 'DELETE_NOTIFICATION', payload: id });
     }
 
+    handleClear = () => {
+        this.props.dispatch({ type: 'CLEAR_NOTIFICATIONS' });
+    }
+
     render() {
         return (
             <div>
@@ -21,6 +25,7 @@ class NotificationPage extends Component {
                     Notifications
                 </h1>
                 <div className="outerDiv">
+                    <Button color="secondary" variant="contained" onClick={this.handleClear} disabled={this.props.notifications.length === 0}>Clear All</Button>
                     <Paper>
                         <div className="innerDiv">
                             {this.props.notifications.length > 0 ? 
