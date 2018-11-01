@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { MenuItem } from '@material-ui/core';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import Footer from '../Footer/Footer';
-import { HomeOutlined, SearchSharp, InfoOutlined, PermDeviceInformation, FiberManualRecord, MusicVideo } from '@material-ui/icons'
+import { HomeOutlined, SearchSharp, InfoOutlined, PermDeviceInformation, FiberManualRecord, MusicVideo, NotesOutlined } from '@material-ui/icons'
 import './Nav.css';
 
 const Nav = (props) => (
@@ -52,6 +52,12 @@ const Nav = (props) => (
             <Link className="nav-link" to="/songs">
               <MusicVideo />
               My Songs
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link className="nav-link" to="/notifications">
+              <NotesOutlined />
+              Notifications
             </Link>
           </MenuItem>
           <MenuItem>

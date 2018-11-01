@@ -1,0 +1,19 @@
+.outerDiv {
+    width: 70%;
+}
+
+.innerDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.notificationsList {
+    list-style-type: none;
+}
+
+li {
+    border-style: ridge;
+    border-radius: 5px;
+    margin: 10px;
+}
