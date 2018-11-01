@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { MenuItem } from '@material-ui/core';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import Footer from '../Footer/Footer';
-import { HomeOutlined, SearchSharp, InfoOutlined, PermDeviceInformation, FiberManualRecord, MusicVideo } from '@material-ui/icons'
+import { HomeOutlined, SearchSharp, InfoOutlined, PermDeviceInformation, FiberManualRecord, MusicVideo, NotesOutlined } from '@material-ui/icons'
 import './Nav.css';
 
 const Nav = (props) => (
@@ -55,6 +55,13 @@ const Nav = (props) => (
             </Link>
           </MenuItem>
           <MenuItem>
+            <Link className="nav-link" to="/notifications">
+              <NotesOutlined />
+              Notifications
+              {props.notifications.length > 0 && ` (${props.notifications.length})`}
+            </Link>
+          </MenuItem>
+          <MenuItem>
             <LogOutButton className="nav-link" />
           </MenuItem>
         </>
@@ -68,6 +75,7 @@ const Nav = (props) => (
 
 const mapStateToProps = state => ({
   user: state.user,
+  notifications: state.notifications,
 });
 
 export default connect(mapStateToProps)(Nav);

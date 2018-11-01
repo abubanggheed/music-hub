@@ -65,6 +65,8 @@ function* addSong(action) {
     yield axios.post('api/song/' + action.payload.project_id, { ...refs, name: action.payload.name });
     //on complete, projectSongs is triggered to obtain an updated list.
     yield dispatch({ type: 'PROJECT_SONGS', payload: action.payload.project_id });
+    //send a notification to the project creator that someone has uploaded a remix
+    yield dispatch({ type: 'UPLOAD_NOTIFICATION', payload: action.payload.project_id });
     yield dispatch({ type: 'FINISH_UPLOAD' });
   } catch (error) {
     console.log('Error with adding song:', error);

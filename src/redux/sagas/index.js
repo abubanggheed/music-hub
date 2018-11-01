@@ -5,6 +5,7 @@ import userSaga from './userSaga';
 import projectSaga from './projectSaga';
 import songSaga from './songSaga';
 import urlSaga from './urlSaga';
+import notificationSaga from './notificationSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -21,5 +22,6 @@ export default function* rootSaga() {
     projectSaga(),
     songSaga(),
     urlSaga(),
+    notificationSaga(),
   ]);
 }

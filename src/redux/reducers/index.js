@@ -7,6 +7,7 @@ import info from './infoReducer';
 import url from './urlReducer';
 import download from './downloadReducer';
 import messages from './messagesReducer';
+import notifications from './notificationsReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   url, //will hold urls for available downloads
   download, //will hold the download url for the current download, and currently playing audio
   messages, //will hold values to determine which dialog is open
+  notifications, //will hold values that show up on the notifications page
 });
 
 export default rootReducer;

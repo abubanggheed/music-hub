@@ -13,6 +13,7 @@ const userRouter = require('./routes/user.router');
 const songRouter = require('./routes/song.router');
 const projectRouter = require('./routes/project.router');
 const urlRouter = require('./routes/url.router');
+const notificationRouter = require('./routes/notification.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -30,6 +31,7 @@ app.use('/api/user', userRouter);
 app.use('/api/song', songRouter);
 app.use('/api/project', projectRouter);
 app.use('/api/url', urlRouter);
+app.use('/api/notification', notificationRouter);
 
 // Serve static files
 app.use(express.static('build'));

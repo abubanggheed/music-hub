@@ -22,6 +22,7 @@ import ProjectForm from '../ProjectForm/ProjectForm';
 import ProjectPage from '../ProjectPage/ProjectPage';
 import ActiveAudio from '../ActiveAudio/ActiveAudio';
 import Dialogs from '../Dialogs/AllDialogs';
+import NotificationPage from '../NotificationPage/NotificationPage';
 import { lightBlue, deepPurple, blueGrey } from '@material-ui/core/colors';
 
 import './App.css';
@@ -42,7 +43,8 @@ class App extends Component {
   componentDidMount() {
     //sees if there is existing user data stored in the browser, and automatically
     //sends in that username and password.
-    this.props.dispatch({ type: 'FETCH_USER' })
+    this.props.dispatch({ type: 'FETCH_USER' });
+    this.props.dispatch({ type: 'GET_NOTIFICATIONS' });
   }
 
   render() {
@@ -96,6 +98,11 @@ class App extends Component {
                   exact
                   path="/songs"
                   component={MySongs}
+                />
+                <ProtectedRoute
+                  exact
+                  path="/notifications"
+                  component={NotificationPage}
                 />
                 <Route
                   exact
