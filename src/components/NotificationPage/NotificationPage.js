@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Paper } from '@material-ui/core';
+import { Paper, IconButton } from '@material-ui/core';
+import { Delete } from '@material-ui/icons';
 import './notifications.css';
 
 class NotificationPage extends Component {
 
     componentDidMount() {
         this.props.dispatch({ type: 'GET_NOTIFICATIONS' });
+    }
+
+    handleDelete = id => {
+        this.props.dispatch({ type: 'DELETE_NOTIFICATION', payload: id });
     }
 
     render() {
@@ -18,11 +23,15 @@ class NotificationPage extends Component {
                 <div className="outerDiv">
                     <Paper>
                         <div className="innerDiv">
-
                             {this.props.notifications.length > 0 ? 
                             <ul className="notificationsList">
                                 {this.props.notifications.map(notification => (
-                                    <li key={notification.id}>{notification.content}</li>
+                                    <li key={notification.id}>
+                                    <IconButton onClick={() => this.handleDelete(notification.id)}>
+                                        <Delete />
+                                    </IconButton>
+                                    {notification.content}
+                                    </li>
                                 ))}
                             </ul> :
                                 <p>
