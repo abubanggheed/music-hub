@@ -68,10 +68,16 @@ class ProjectTable extends Component {
           </div>}
 
         <Dialog open={this.state.confirmDelete}>
-          <Typography variant="h4">Are you really going to delete an entire project?</Typography>
-          <Typography variant="body1">Deleting a project deletes all songs within it.</Typography>
-          <IconButton color="primary" onClick={this.handleCancel}><Save />Maybe Not</IconButton>
-          <IconButton color="secondary" onClick={this.handleDelete}><DeleteSweep />I do what I have to</IconButton>
+          <div className="generalDialog">
+            <Typography variant="h4">Are you really going to delete an entire project?</Typography>
+            <Typography variant="body1">Deleting a project deletes all songs within it.</Typography>
+            <pre>
+              <IconButton color="primary" onClick={this.handleCancel}><Save />Maybe Not</IconButton>
+            </pre>
+            <pre>
+              <IconButton color="secondary" onClick={this.handleDelete}><DeleteSweep />I do what I have to</IconButton>
+            </pre>
+          </div>
         </Dialog>
       </div>
     );

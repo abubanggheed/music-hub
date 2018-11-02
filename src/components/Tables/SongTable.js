@@ -92,9 +92,11 @@ class SongTable extends Component {
             You currently have no songs.
         </p>}
         <Dialog open={this.state.manage.open}>{/* this dialog gives the user the ability to delete their own songs */}
-          <Typography variant="h4">Manage {this.state.manage.song && this.state.manage.song.name}</Typography>
-          <IconButton color="secondary" onClick={this.handleDelete}>Delete <DeleteForever /></IconButton>
-          <IconButton color="primary" onClick={this.handleClose}>Cancel <Cancel /></IconButton>
+          <div className="generalDialog">
+            <Typography variant="h4">Manage {this.state.manage.song && this.state.manage.song.name}</Typography>
+            <IconButton color="secondary" onClick={this.handleDelete}>Delete <DeleteForever /></IconButton>
+            <IconButton color="primary" onClick={this.handleClose}>Cancel <Cancel /></IconButton>
+          </div>
         </Dialog>
       </div>
     );

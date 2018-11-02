@@ -95,13 +95,15 @@ class SongTable extends Component {
             This project has no songs.
           </p>}
         <Dialog open={this.state.downloadDialog}>{/* this dialog shows all files available for download, and offers a button that downloads them */}
-          <Typography variant="h4">Available Downloads</Typography>
-          <DialogContent>
-            {this.props.urls.mp3Status && <pre><IconButton onClick={() => this.handleFile({ type: 'mp3', id: this.props.urls.id })}><MusicNote />Get mp3</IconButton></pre>}
-            {this.props.urls.wavStatus && <pre><IconButton onClick={() => this.handleFile({ type: 'wav', id: this.props.urls.id })}><MusicNoteSharp />Get wav</IconButton></pre>}
-            {this.props.urls.productionStatus && <pre><IconButton onClick={() => this.handleFile({ type: 'production', id: this.props.urls.id })}><FileCopy />Get production file</IconButton></pre>}
-            <IconButton color="secondary" onClick={this.handleCancel}><CancelOutlined />Cancel</IconButton>
-          </DialogContent>
+          <div className="generalDialog">
+            <Typography variant="h4">Available Downloads</Typography>
+            <DialogContent>
+              {this.props.urls.mp3Status && <pre><IconButton onClick={() => this.handleFile({ type: 'mp3', id: this.props.urls.id })}><MusicNote />Get mp3</IconButton></pre>}
+              {this.props.urls.wavStatus && <pre><IconButton onClick={() => this.handleFile({ type: 'wav', id: this.props.urls.id })}><MusicNoteSharp />Get wav</IconButton></pre>}
+              {this.props.urls.productionStatus && <pre><IconButton onClick={() => this.handleFile({ type: 'production', id: this.props.urls.id })}><FileCopy />Get production file</IconButton></pre>}
+              <IconButton color="secondary" onClick={this.handleCancel}><CancelOutlined />Cancel</IconButton>
+            </DialogContent>
+          </div>
         </Dialog>
         <DownloadFooter />
       </div>

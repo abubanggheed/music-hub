@@ -1,5 +1,6 @@
 import React from 'react';
 import UploadDialog from './UploadDialog';
+import DeleteDialog from './DeleteDialog';
 import DownloadDialog from './DownloadDialog';
 import DeleteProjectDialog from './DeleteProjectDialog';
 import LoginDialog from './LoginDialog';
@@ -12,6 +13,7 @@ const Dialogs = props => {
     return (
         <div>
             <UploadDialog/>
+            <DeleteDialog />
             <DownloadDialog/>
             <DeleteProjectDialog/>
             <LoginDialog/>

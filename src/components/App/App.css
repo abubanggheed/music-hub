@@ -54,3 +54,7 @@ input {
      color: #402040;
      text-align: center;
  }
+
+ .generalDialog {
+    margin: 3em;
+ }
