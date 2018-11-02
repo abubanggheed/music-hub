@@ -29,7 +29,7 @@ class ProjectPage extends Component {
       uploadDialog: false,
     })
   }
-//handleChange sets a state to the file put into one of the 3 file inputs
+  //handleChange sets a state to the file put into one of the 3 file inputs
   handleChange = param => event => {
     this.setState({
       ...this.state,
@@ -76,15 +76,17 @@ class ProjectPage extends Component {
         </h1>
         <h2 className="welcome">Creator: {this.props.info.username}</h2>
         <Dialog open={this.state.uploadDialog}>
-          <Typography variant="h5">New Remix</Typography>
-          <form onSubmit={this.handleSubmit}>
-            <InputLabel required>Name<Input value={this.state.newUpload.name} onChange={this.handleNameChange} type="text" required /></InputLabel>
-            <InputLabel required>mp3<Input accept=".mp3" name="mp3" files={this.state.newUpload.mp3} onChange={this.handleChange('mp3')} type="file" required /></InputLabel>
-            <InputLabel>wav<Input name="wav" accept=".wav" files={this.state.newUpload.wav} onChange={this.handleChange('wav')} type="file" /></InputLabel>
-            <InputLabel>production file (zip)<Input accept=".zip" name="production" files={this.state.newUpload.production} onChange={this.handleChange('production')} type="file" /></InputLabel>
-            <Input type="submit" value="upload files" />
-          </form>
-          <IconButton color="secondary" onClick={this.cancleUpload}><Cancel />Cancle</IconButton>
+          <div className="generalDialog">
+            <Typography variant="h5">New Remix</Typography>
+            <form onSubmit={this.handleSubmit}>
+              <InputLabel required>Name<Input value={this.state.newUpload.name} onChange={this.handleNameChange} type="text" required /></InputLabel>
+              <InputLabel required>mp3<Input accept=".mp3" name="mp3" files={this.state.newUpload.mp3} onChange={this.handleChange('mp3')} type="file" required /></InputLabel>
+              <InputLabel>wav<Input name="wav" accept=".wav" files={this.state.newUpload.wav} onChange={this.handleChange('wav')} type="file" /></InputLabel>
+              <InputLabel>production file (zip)<Input accept=".zip" name="production" files={this.state.newUpload.production} onChange={this.handleChange('production')} type="file" /></InputLabel>
+              <Input type="submit" value="upload files" />
+            </form>
+            <IconButton color="secondary" onClick={this.cancleUpload}><Cancel />Cancle</IconButton>
+          </div>
         </Dialog>
         <Songs project_id={this.props.info.project_id}
           owner={this.props.user.username === this.props.info.username} />
